@@ -3,8 +3,8 @@ import MPIQScene from './scenes/MPIQScene';
 
 const config = {
   type: Phaser.AUTO,
-  width: 800,
-  height: 600,
+  width: 642,
+  height: 482,
   backgroundColor: '#87ceeb',
   scene: MPIQScene
 };
