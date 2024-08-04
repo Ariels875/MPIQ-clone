@@ -1,12 +1,13 @@
 import Phaser from 'phaser';
-import MPIQScene from './scenes/MPIQScene';
+import MenuScene from './scenes/MenuScene';
+import GameScene from './scenes/GameScene';
 
 const config = {
   type: Phaser.AUTO,
-  width: 642,
-  height: 482,
+  width: 800,
+  height: 600,
   backgroundColor: '#87ceeb',
-  scene: MPIQScene
+  scene: [MenuScene, GameScene]
 };
 
-const game = new Phaser.Game(config);
+new Phaser.Game(config);

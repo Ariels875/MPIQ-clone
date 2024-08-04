@@ -1,0 +1,210 @@
+{
+    "level1": [
+        {
+            "question": "¿Cuál es el nombre del fontanero rojo más famoso de los videojuegos?",
+            "answers": ["Mario", "Luigi", "Wario"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Qué animal es Sonic en los videojuegos?",
+            "answers": ["Erizo", "Zorro", "Ratón"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Cómo se llama el personaje principal de The Legend of Zelda?",
+            "answers": ["Link", "Zelda", "Ganon"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿De qué color es Yoshi en su forma más común?",
+            "answers": ["Rojo", "Verde", "Azul"],
+            "correctAnswer": 1
+        },
+        {
+            "question": "¿Quién es el villano principal en la serie de juegos de Mario?",
+            "answers": ["Bowser", "Wario", "Donkey Kong"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Cuál es el nombre del hermano de Mario?",
+            "answers": ["Wario", "Luigi", "Toad"],
+            "correctAnswer": 1
+        },
+        {
+            "question": "¿Cómo se llama la princesa que Mario rescata con frecuencia?",
+            "answers": ["Peach", "Daisy", "Zelda"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Qué objeto utiliza Mario para volverse invencible por un corto tiempo?",
+            "answers": ["Flor de fuego", "Estrella", "Champiñón"],
+            "correctAnswer": 1
+        },
+        {
+            "question": "¿Cuál es el nombre del rival de Sonic el erizo?",
+            "answers": ["Tails", "Knuckles", "Dr. Eggman"],
+            "correctAnswer": 2
+        },
+        {
+            "question": "¿Cuál es el nombre del primer juego de Mario?",
+            "answers": ["Super Mario Bros.", "Donkey Kong", "Mario Kart"],
+            "correctAnswer": 1
+        }
+    ],
+    "level2": [
+        {
+            "question": "¿En qué año se lanzó el primer juego de Mario Party?",
+            "answers": ["1995", "1998", "2000"],
+            "correctAnswer": 1
+        },
+        {
+            "question": "¿Cuál es el nombre del primer jefe en Super Mario 64?",
+            "answers": ["King Bob-omb", "Bowser", "Big Boo"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Qué consola presentó por primera vez a Mario Kart?",
+            "answers": ["Nintendo 64", "Super Nintendo", "GameCube"],
+            "correctAnswer": 1
+        },
+        {
+            "question": "¿Cuál es el nombre del planeta en el que se desarrolla Super Mario Galaxy?",
+            "answers": ["Mushroom Kingdom", "Mario World", "Planet Mario"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿En qué juego aparece por primera vez Bowser Jr.?",
+            "answers": ["Super Mario Sunshine", "Mario Kart 64", "Super Mario 64"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Cuál es el poder de la flor de fuego en los juegos de Mario?",
+            "answers": ["Volar", "Lanzar bolas de fuego", "Hacerse grande"],
+            "correctAnswer": 1
+        },
+        {
+            "question": "¿Qué juego de Mario tiene una versión con tableros como un juego de mesa?",
+            "answers": ["Super Mario World", "Mario Party", "Mario Kart"],
+            "correctAnswer": 1
+        },
+        {
+            "question": "¿Qué consola de Nintendo fue la primera en tener gráficos en 3D?",
+            "answers": ["GameCube", "Nintendo 64", "Wii"],
+            "correctAnswer": 1
+        },
+        {
+            "question": "¿Cuál es el nombre del enemigo que siempre lleva un caparazón en la espalda?",
+            "answers": ["Goomba", "Koopa Troopa", "Shy Guy"],
+            "correctAnswer": 1
+        },
+        {
+            "question": "¿Qué juego popular de Mario involucra carreras de autos?",
+            "answers": ["Mario Kart", "Mario Tennis", "Mario Party"],
+            "correctAnswer": 0
+        }
+    ],
+    "level3": [
+        {
+            "question": "¿Qué item permite a Mario volar en Super Mario 64?",
+            "answers": ["La gorra alada", "La estrella", "El champiñón"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Cuál es el nombre del dinosaurio amigable de Mario?",
+            "answers": ["Yoshi", "Bowser", "Koopa"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Qué juego de Mario incluye un gorro que da habilidades especiales?",
+            "answers": ["Super Mario Odyssey", "Super Mario World", "Mario Kart 8"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Cuál es el nombre del videojuego en el que Mario viaja a través de cuadros mágicos?",
+            "answers": ["Super Mario 64", "Super Mario Sunshine", "Super Mario Bros. 3"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Cuál es el nombre del villano en la serie de juegos Donkey Kong Country?",
+            "answers": ["King K. Rool", "Bowser", "Ganondorf"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿En qué juego de Mario se introdujo a Rosalina?",
+            "answers": ["Super Mario Galaxy", "Super Mario 3D World", "Mario Kart 8"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Qué objeto hace a Mario invencible temporalmente?",
+            "answers": ["La estrella", "La flor de fuego", "El caparazón azul"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Qué personaje es conocido como el mejor amigo de Sonic?",
+            "answers": ["Tails", "Knuckles", "Amy"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Cuál es el nombre del primer videojuego de Yoshi?",
+            "answers": ["Yoshi's Island", "Yoshi's Story", "Yoshi's Woolly World"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Qué juego de Mario incluye un modo de juego llamado 'Fiebre del oro'?",
+            "answers": ["New Super Mario Bros. 2", "Super Mario Odyssey", "Super Mario 3D Land"],
+            "correctAnswer": 0
+        }
+    ],
+    "level4": [
+        {
+            "question": "¿En qué juego de Mario se introduce a Bowser Jr.?",
+            "answers": ["Super Mario Sunshine", "Super Mario Galaxy", "Super Mario 3D World"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Cuál es el nombre del principal antagonista en Super Mario Galaxy?",
+            "answers": ["Bowser", "King Boo", "Kamek"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿En qué consola apareció por primera vez 'Super Mario Sunshine'?",
+            "answers": ["Nintendo GameCube", "Nintendo 64", "Wii"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Cuál es el nombre del rey de los Koopas?",
+            "answers": ["Bowser", "King Boo", "Wario"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿En qué juego de Mario se introdujo el caparazón azul?",
+            "answers": ["Mario Kart 64", "Super Mario 64", "Super Mario Sunshine"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Cuál es el nombre del primer juego de rol (RPG) de Mario?",
+            "answers": ["Super Mario RPG", "Paper Mario", "Mario & Luigi: Superstar Saga"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿En qué juego de Mario se introdujo la mecánica de viaje en el tiempo?",
+            "answers": ["Super Mario Odyssey", "Super Mario 3D World", "Mario & Luigi: Partners in Time"],
+            "correctAnswer": 2
+        },
+        {
+            "question": "¿Cuál es el nombre del primer juego de Mario en 3D?",
+            "answers": ["Super Mario 64", "Super Mario World", "Super Mario Bros. 3"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Qué personaje femenino es conocida por ayudar a Mario en Super Mario Galaxy?",
+            "answers": ["Rosalina", "Peach", "Daisy"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿Cuál es el nombre del planeta principal en Super Mario Galaxy 2?",
+            "answers": ["Starship Mario", "Planet Popstar", "Dino Piranha"],
+            "correctAnswer": 0
+        }
+    ]
+}

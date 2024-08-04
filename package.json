@@ -26,7 +26,8 @@
   "homepage": "https://github.com/Ariels875/MPIQ-clone#readme",
   "dependencies": {
     "phaser": "^3.80.1",
-    "three": "^0.167.0"
+    "three": "^0.167.0",
+    "three-obj-loader": "^1.1.3"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
