@@ -1,12 +1,67 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M.P.I.Q. Game</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  </head>
-  <body>
-    <div id="game"></div>
-    <script src="bundle.js"></script>
-  </body>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>M.P.I.Q. Game</h1>
+            <nav>
+                <ul>
+                    <li><a href="#about">Cómo jugar</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                    <li><a href="#donate">Donar</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <script src="bundle.js"></script>
+        <section id="game-section" class="section">
+            <div class="container">
+                <div id="game"></div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2>Acerca del Juego</h2>
+                <p>Bienvenido a M.P.I.Q. Game, una experiencia emocionante que te llevará a través de desafiantes niveles y aventuras increíbles. ¡Prepárate para poner a prueba tus habilidades y divertirte!</p>
+                <p>Instrucciones: Primero selecciona el nivel usando las flechas que salen al inicio, despues pulsa Start para empezar, cuando quieras responder una pregunta dale click a la caja morada y seleciona A B o Z segun la respuesta correcta, tambien puedes usar las teclas de tu computadora A B y Z. ¡Buena suerte!</p>
+            </div>
+        </section>
+        
+        <section id="contact" class="section">
+            <div class="container">
+                <h2>Contacto del Creador</h2>
+                <div class="creator-info">
+                    <img src="https://i.imgur.com/fli08dk.png" alt="Creador del juego">
+                    <div class="creator-details">
+                        <h3>Ariel Castro</h3>
+                        <p>Hola, soy Ariel Castro, el desarrollador de M.P.I.Q. Game. Comencé este proyecto porque siempre he sido un apasionado de los videojuegos y quería crear algo divertido y desafiante para todos. ¡Espero que disfrutes jugando tanto como yo disfruté creándolo!</p>
+                        <div class="social-media">
+                            <a href="https://www.instagram.com/ariels875/" target="_blank">Instagram</a>
+                            <a href="https://www.linkedin.com/in/ariels875/" target="_blank">LinkedIn</a>
+                            <a href="https://github.com/Ariels875" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="donate" class="section">
+            <div class="container">
+                <h2>Donar</h2>
+                <p>Si disfrutas del juego y quieres apoyar su desarrollo futuro, considera hacer una donación. ¡Cualquier cantidad es apreciada!</p>
+                <button id="donate-button">Donar</button>
+            </div>
+        </section>
+    </main>
+</body>
 </html>
