@@ -8,8 +8,10 @@ export default class GameScene extends Phaser.Scene {
         this.currentQuestionIndex = 0;
         this.currentQuestionIndex = 0;
         this.score = 0;
-        this.canAnswer = true;
+        this.canAnswer = false;
         this.buttonImages = [];
+        this.questionTimer = null;
+        this.answerTimer = null;
     }
 
     init(data) {
@@ -60,12 +62,8 @@ export default class GameScene extends Phaser.Scene {
         this.add.image(480, 275, 'mushroom').setOrigin(0).setScale(0.30);
         this.add.image(685, 275, 'mushroom').setOrigin(0).setScale(0.30);
 
-
-
         const allQuestions = this.cache.json.get('questions');
         this.questions = allQuestions[`level${this.level}`];
-
-        // animaciones
 
         this.tweens.add({
             targets: board,
@@ -81,18 +79,10 @@ export default class GameScene extends Phaser.Scene {
             duration: 2000,
             delay: 500,
             onComplete: () => {
-                this.showQuestion();
+                this.startNextQuestion();
             }
         });
 
-        this.characterAnimations = new CharacterAnimations(this);
-        this.characterAnimations.create();
-
-        /* Eventos de teclado
-        this.input.keyboard.on('keydown-A', () => this.handleCharacterAnimation('A'));
-        this.input.keyboard.on('keydown-B', () => this.handleCharacterAnimation('B'));
-        this.input.keyboard.on('keydown-Z', () => this.handleCharacterAnimation('Z'));
-        */
         this.input.keyboard.on('keydown-A', () => this.handleAnswer(0));
         this.input.keyboard.on('keydown-B', () => this.handleAnswer(1));
         this.input.keyboard.on('keydown-Z', () => this.handleAnswer(2));
@@ -110,57 +100,49 @@ export default class GameScene extends Phaser.Scene {
         this.showQuestion();
     }
 
-    showQuestion() {
+    startNextQuestion() {
+        this.clearTimers();
+        this.clearAnswers();
+        
         if (this.currentQuestionIndex < this.questions.length) {
-            const question = this.questions[this.currentQuestionIndex];
-            this.questionText.setText(question.question);
-            this.answerTexts.forEach(text => text.setText(''));
-
-            this.canAnswer = true;
-            this.time.delayedCall(6000, () => {
-                if (this.canAnswer) {
-                    this.showAnswers();
-                }
+            this.showQuestion();
+            this.questionTimer = this.time.delayedCall(8000, () => {
+                this.showAnswers();
             });
         } else {
             this.endGame();
         }
     }
 
-    showAnswers() {
+    showQuestion() {
         const question = this.questions[this.currentQuestionIndex];
+        this.questionText.setText(question.question);
+        this.canAnswer = false;
+    }
+
+    showAnswers() {
+        this.clearTimers();
         this.questionText.setText('');
         
-        // Limpiar imágenes de botones anteriores
-        this.buttonImages.forEach(image => image.destroy());
-        this.buttonImages = [];
-        
+        const question = this.questions[this.currentQuestionIndex];
         const buttons = ['abutton', 'bbutton', 'zbutton'];
         
         question.answers.forEach((answer, index) => {
-            this.answerTexts[index].setText('');
             const buttonImage = this.add.image(this.answerTexts[index].x - 30, this.answerTexts[index].y + 10, buttons[index]).setOrigin(0.5).setScale(0.5);
             this.buttonImages.push(buttonImage);
             this.answerTexts[index].setText(answer);
         });
 
-        this.time.delayedCall(5000, () => {
-            if (this.canAnswer) {
-                this.handleNoAnswer();
-            }
+        this.canAnswer = true;
+        this.answerTimer = this.time.delayedCall(5000, () => {
+            this.handleNoAnswer();
         });
     }
     
-
-    handleCharacterAnimation(character) {
-        if (this.canAnswer) {
-            this.characterAnimations.playAnimation(character);
-            this.showAnswers();
-        }
-    }
-
     handleAnswer(index) {
         if (this.canAnswer) {
+            this.canAnswer = false;
+            this.clearTimers();
             const question = this.questions[this.currentQuestionIndex];
             if (index === question.correctAnswer) {
                 this.score++;
@@ -168,30 +150,37 @@ export default class GameScene extends Phaser.Scene {
                 console.log('Respuesta correcta');
             } else {
                 console.log('Respuesta incorrecta');
-                this.canAnswer = false;
             }
-            this.nextQuestion();
+            this.currentQuestionIndex++;
+            this.time.delayedCall(1000, () => {
+                this.startNextQuestion();
+            });
         }
     }
+
 
     handleNoAnswer() {
         console.log('No se respondió a tiempo');
         this.canAnswer = false;
-        this.nextQuestion();
+        this.currentQuestionIndex++;
+        this.startNextQuestion();
     }
 
-    nextQuestion() {
-        // Ocultar imágenes de botones antes de mostrar la siguiente pregunta
+    clearTimers() {
+        if (this.questionTimer) this.questionTimer.remove();
+        if (this.answerTimer) this.answerTimer.remove();
+    }
+
+    clearAnswers() {
         this.buttonImages.forEach(image => image.destroy());
         this.buttonImages = [];
-        
-        this.currentQuestionIndex++;
-        this.time.delayedCall(1000, () => {
-            this.showQuestion();
-        });
+        this.answerTexts.forEach(text => text.setText(''));
     }
 
     endGame() {
+        this.clearTimers();
+        this.clearAnswers();
+        this.questionText.setText('');
         this.add.text(400, 300, `Juego terminado. Puntuación: ${this.score}`, { fontSize: '32px', fill: '#fe0404' }).setOrigin(0.5);
     }
 }
