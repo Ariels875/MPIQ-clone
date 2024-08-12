@@ -1,10 +1,10 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist')
   },
   module: {
     rules: [
@@ -20,15 +20,15 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif|ogg|mp3|wav)$/i,
-        type: 'asset/resource',
-      },
-    ],
+        type: 'asset/resource'
+      }
+    ]
   },
   devServer: {
     static: {
-      directory: path.join(__dirname, 'public'),
+      directory: path.join(__dirname, 'public')
     },
     compress: true,
-    port: 8080,
-  },
-};
+    port: 8080
+  }
+}

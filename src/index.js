@@ -1,6 +1,6 @@
-import Phaser from 'phaser';
-import MenuScene from './scenes/MenuScene';
-import GameScene from './scenes/GameScene';
+import Phaser from 'phaser'
+import MenuScene from './scenes/MenuScene'
+import GameScene from './scenes/GameScene'
 
 const config = {
   type: Phaser.AUTO,
@@ -13,6 +13,6 @@ const config = {
   },
   backgroundColor: '#87ceeb',
   scene: [MenuScene, GameScene]
-};
+}
 
-new Phaser.Game(config);
+new Phaser.Game(config)

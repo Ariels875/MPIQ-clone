@@ -34,8 +34,10 @@
     "@babel/preset-env": "^7.25.3",
     "babel-loader": "^9.1.3",
     "file-loader": "^6.2.0",
+    "standard": "^17.1.0",
     "webpack": "^5.93.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.4"
+    "webpack-dev-server": "^5.0.4",
+    "eslintConfig": "./node_modules/standard/eslintrc.json"
   }
 }
