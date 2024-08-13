@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
-/* import CharacterAnimations from './CharacterAnimations'*/
+import * as THREE from 'three'
+import { Animations } from './Animations'
 
 export default class GameScene extends Phaser.Scene {
   constructor () {
@@ -74,7 +75,14 @@ export default class GameScene extends Phaser.Scene {
 
     const allQuestions = this.cache.json.get('questions')
     this.questions = allQuestions[`level${this.level}`]
+    // Inicializar Three.js
+    this.threeScene = new THREE.Scene()
+    this.threeCamera = new THREE.PerspectiveCamera(75, this.scale.width / this.scale.height, 0.1, 1000)
+    this.threeRenderer = new THREE.WebGLRenderer({ alpha: true })
+    this.threeRenderer.setSize(this.scale.width, this.scale.height)
+    this.add.dom(0, 0, this.threeRenderer.domElement)
 
+    this.animations = new Animations(this.threeScene)
     this.tweens.add({
       targets: board,
       y: 65,
@@ -149,7 +157,7 @@ export default class GameScene extends Phaser.Scene {
     this.canAnswer = false
 
     if (this.penaltyActive) {
-      this.penaltyActive.setText('Penalización activada')
+      this.penaltyText.setText('Penalización activada')
     } else {
       this.penaltyText.setText('')
     }
@@ -207,9 +215,10 @@ export default class GameScene extends Phaser.Scene {
   handleWrongAnswer () {
     console.log('Respuesta incorrecta')
     this.penaltyActive = true
+    this.animations.startDizzyAnimation()
     this.time.delayedCall(7000 + 5000, () => {
-      // Duración de la siguiente pregunta + tiempo de respuesta
       this.penaltyActive = false
+      this.animations.stopDizzyAnimation()
     })
   }
 
@@ -242,5 +251,12 @@ export default class GameScene extends Phaser.Scene {
         fill: '#fe0404'
       })
       .setOrigin(0.5)
+  }
+
+  update (time, delta) {
+    if (this.animations) {
+      this.animations.update()
+    }
+    this.threeRenderer.render(this.threeScene, this.threeCamera)
   }
 }
