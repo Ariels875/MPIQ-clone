@@ -1,18 +1,22 @@
 import Phaser from 'phaser'
+import { enable3d, Canvas } from '@enable3d/phaser-extension'
 import MenuScene from './scenes/MenuScene'
+import Animations from './scenes/Animations'
 import GameScene from './scenes/GameScene'
 
 const config = {
-  type: Phaser.AUTO,
-  parent: 'game',
-  width: 800,
-  height: 600,
+  type: Phaser.WEBGL,
+  transparent: true,
   scale: {
     mode: Phaser.Scale.FIT,
-    autoCenter: Phaser.Scale.CENTER_BOTH
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+    width: 800,
+    height: 600
   },
-  backgroundColor: '#87ceeb',
-  scene: [MenuScene, GameScene]
+  scene: [MenuScene, GameScene, Animations],
+  ...Canvas()
 }
 
-new Phaser.Game(config)
+window.addEventListener('load', () => {
+  enable3d(() => new Phaser.Game(config)).withPhysics('/assets/ammo')
+})

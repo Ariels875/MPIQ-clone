@@ -1,68 +1,62 @@
-import * as THREE from 'three'
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
+import { Scene3D } from '@enable3d/phaser-extension'
+import { AnimationMixer } from 'three'
 
-export class Animations {
-  constructor (scene) {
-    this.scene = scene
-    this.character = null
-    this.mixer = null
-    this.dizzyAnimation = null
-    this.clock = new THREE.Clock()
-
-    this.loadCharacter()
+export default class Animations extends Scene3D {
+  constructor () {
+    super('Animations')
   }
 
-  loadCharacter () {
-    const loader = new OBJLoader()
-    loader.load(
-      'assets/images/Mario/mario.obj',
-      (object) => {
-        this.character = object
-        this.scene.add(this.character)
-        this.setupAnimation()
-      },
-      (xhr) => {
-        console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-      },
-      (error) => {
-        console.error('An error happened', error)
+  init (data) {
+    this.level = data.level
+    this.accessThirdDimension()
+  }
+
+  preload () {}
+
+  create () {
+    // Crear la escena 3D básica
+    this.third.warpSpeed()
+
+    // Cargar y añadir el modelo de Mario a la escena usando third.load.gltf
+    this.third.load.gltf('assets/images/mario/mario.glb').then(gltf => {
+      const mario = gltf.scene
+      mario.scale.set(1, 1, 1) // Escalar el modelo si es necesario
+      mario.position.set(0, 0, 0) // Posicionar el modelo en la escena
+      this.third.add.existing(mario) // Añadir el modelo a la escena
+
+      // Configurar el AnimationMixer para Mario
+      this.mixer = new AnimationMixer(mario)
+
+      // Acceder a las animaciones
+      this.animations = {
+        idle: this.mixer.clipAction(gltf.animations.find(clip => clip.name === 'idle')),
+        idlee: this.mixer.clipAction(gltf.animations.find(clip => clip.name === 'idlee')),
+        jump: this.mixer.clipAction(gltf.animations.find(clip => clip.name === 'jump'))
       }
-    )
+
+      // Iniciar la animación 'idle' por defecto
+      this.playAnimation('idle')
+    })
   }
 
-  setupAnimation () {
-    this.mixer = new THREE.AnimationMixer(this.character)
+  playAnimation (name) {
+    // Detener todas las animaciones actuales
+    Object.values(this.animations).forEach(action => action.stop())
 
-    // Create a simple head-bobbing animation
-    const headBone = this.character.getObjectByName('Head') // Adjust this to match your model's bone structure
-    if (headBone) {
-      const rotationKF = new THREE.QuaternionKeyframeTrack(
-        '.quaternion',
-        [0, 0.5, 1],
-        [0, 0, 0, 1, 0.1, 0, 0, 1, 0, 0, 0, 1]
-      )
-
-      this.dizzyAnimation = new THREE.AnimationClip('dizzy', 1, [rotationKF])
-    }
+    // Reproducir la animación solicitada
+    this.animations[name].play()
   }
 
-  startDizzyAnimation () {
-    if (this.mixer && this.dizzyAnimation) {
-      const action = this.mixer.clipAction(this.dizzyAnimation)
-      action.setLoop(THREE.LoopRepeat)
-      action.play()
-    }
-  }
-
-  stopDizzyAnimation () {
+  update (time, delta) {
+    // Actualizar el AnimationMixer en cada frame
     if (this.mixer) {
-      this.mixer.stopAllAction()
+      this.mixer.update(delta * 0.001) // delta en segundos
     }
-  }
 
-  update () {
-    if (this.mixer) {
-      this.mixer.update(this.clock.getDelta())
-    }
+    // Lógica adicional para cambiar animaciones según el estado del juego
+    // Por ejemplo, para cambiar a la animación de salto:
+    // if (conditionToJump) {
+    //   this.playAnimation('jump')
+    // }
   }
 }

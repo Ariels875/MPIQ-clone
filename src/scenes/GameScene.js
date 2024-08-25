@@ -1,8 +1,7 @@
-import Phaser from 'phaser'
-import * as THREE from 'three'
-import { Animations } from './Animations'
+import { Scene3D } from '@enable3d/phaser-extension'
+import { AnimationMixer } from 'three'
 
-export default class GameScene extends Phaser.Scene {
+export default class GameScene extends Scene3D {
   constructor () {
     super('GameScene')
     this.questions = []
@@ -14,9 +13,11 @@ export default class GameScene extends Phaser.Scene {
     this.questionTimer = null
     this.answerTimer = null
     this.penaltyActive = false
+    this.animations = {}
   }
 
   init (data) {
+    this.accessThirdDimension()
     this.level = data.level
   }
 
@@ -41,8 +42,29 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create () {
-    this.add.image(0, 0, 'background').setOrigin(0).setScale(1.05)
+    this.third.warpSpeed()
 
+    // this.add.image(0, 0, 'background').setOrigin(0).setScale(1.05)
+
+    this.third.load.gltf('assets/images/Mario/mario.glb').then(gltf => {
+      const mario = gltf.scene
+      mario.scale.set(1, 1, 1) // Escalar el modelo si es necesario
+      mario.position.set(0, 0, 0) // Posicionar el modelo en la escena
+      this.third.add.existing(mario) // Añadir el modelo a la escena
+
+      // Configurar el AnimationMixer para Mario
+      this.mixer = new AnimationMixer(mario)
+
+      // Acceder a las animaciones
+      this.animations = {
+        idle: this.mixer.clipAction(gltf.animations.find(clip => clip.name === 'idle')),
+        idlee: this.mixer.clipAction(gltf.animations.find(clip => clip.name === 'idlee')),
+        jump: this.mixer.clipAction(gltf.animations.find(clip => clip.name === 'jump'))
+      }
+
+      // Iniciar la animación 'idle' por defecto
+      this.playAnimation('idle')
+    })
     this.add.image(35, 525, 'pipe').setOrigin(0).setScale(0.5)
     this.add.image(240, 525, 'pipe').setOrigin(0).setScale(0.5)
     this.add.image(450, 525, 'pipe').setOrigin(0).setScale(0.5)
@@ -75,14 +97,7 @@ export default class GameScene extends Phaser.Scene {
 
     const allQuestions = this.cache.json.get('questions')
     this.questions = allQuestions[`level${this.level}`]
-    // Inicializar Three.js
-    this.threeScene = new THREE.Scene()
-    this.threeCamera = new THREE.PerspectiveCamera(75, this.scale.width / this.scale.height, 0.1, 1000)
-    this.threeRenderer = new THREE.WebGLRenderer({ alpha: true })
-    this.threeRenderer.setSize(this.scale.width, this.scale.height)
-    this.add.dom(0, 0, this.threeRenderer.domElement)
 
-    this.animations = new Animations(this.threeScene)
     this.tweens.add({
       targets: board,
       y: 65,
@@ -215,10 +230,8 @@ export default class GameScene extends Phaser.Scene {
   handleWrongAnswer () {
     console.log('Respuesta incorrecta')
     this.penaltyActive = true
-    this.animations.startDizzyAnimation()
     this.time.delayedCall(7000 + 5000, () => {
       this.penaltyActive = false
-      this.animations.stopDizzyAnimation()
     })
   }
 
@@ -253,10 +266,18 @@ export default class GameScene extends Phaser.Scene {
       .setOrigin(0.5)
   }
 
+  playAnimation (name) {
+    // Detener todas las animaciones actuales
+    Object.values(this.animations).forEach(action => action.stop())
+
+    // Reproducir la animación solicitada
+    this.animations[name].play()
+  }
+
   update (time, delta) {
-    if (this.animations) {
-      this.animations.update()
+    // Actualizar el AnimationMixer en cada frame
+    if (this.mixer) {
+      this.mixer.update(delta * 0.001) // delta en segundos
     }
-    this.threeRenderer.render(this.threeScene, this.threeCamera)
   }
 }

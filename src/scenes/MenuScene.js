@@ -24,7 +24,7 @@ export default class MenuScene extends Phaser.Scene {
     const levelText = this.add.text(450, 150, this.selectedLevel, { fontSize: '32px', fill: '#fff' }).setOrigin(0.5)
 
     // Botones para cambiar el nivel
-    const prevButton = this.add.text(340, 175, '<-', { fontSize: '32px', fill: '#fff' })
+    this.add.text(340, 175, '<-', { fontSize: '32px', fill: '#fff' })
       .setInteractive()
       .on('pointerdown', () => {
         if (this.selectedLevel > 1) {
@@ -33,7 +33,7 @@ export default class MenuScene extends Phaser.Scene {
         }
       })
 
-    const nextButton = this.add.text(400, 175, '->', { fontSize: '32px', fill: '#fff' })
+    this.add.text(400, 175, '->', { fontSize: '32px', fill: '#fff' })
       .setInteractive()
       .on('pointerdown', () => {
         if (this.selectedLevel < 4) { // cantidad de niveles
@@ -43,7 +43,7 @@ export default class MenuScene extends Phaser.Scene {
       })
 
     // Botón de inicio
-    const startButton = this.add.image(392, 425, 'startButton')
+    this.add.image(392, 425, 'startButton')
       .setScale(0.75)
       .setInteractive()
       .on('pointerdown', () => this.startGame())
