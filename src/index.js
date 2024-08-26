@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
 import { enable3d, Canvas } from '@enable3d/phaser-extension'
 import MenuScene from './scenes/MenuScene'
-import Animations from './scenes/Animations'
+import Characters from './scenes/Characters'
 import GameScene from './scenes/GameScene'
 
 const config = {
@@ -13,7 +13,7 @@ const config = {
     width: 800,
     height: 600
   },
-  scene: [MenuScene, GameScene, Animations],
+  scene: [MenuScene, GameScene, Characters],
   ...Canvas()
 }
 
