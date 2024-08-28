@@ -1,4 +1,4 @@
-import { Scene3D } from '@enable3d/phaser-extension'
+import { Scene3D, THREE } from '@enable3d/phaser-extension'
 import Characters from './Characters'
 
 export default class GameScene extends Scene3D {
@@ -13,6 +13,7 @@ export default class GameScene extends Scene3D {
     this.questionTimer = null
     this.answerTimer = null
     this.penaltyActive = false
+    this.characters = null
   }
 
   init (data) {
@@ -43,7 +44,24 @@ export default class GameScene extends Scene3D {
   async create () {
     this.third.warpSpeed()
 
-    // this.add.image(0, 0, 'background').setOrigin(0).setScale(1.05)
+    // Crear una textura para la imagen de fondo
+    this.third.load.texture('background', 'assets/images/background.png', (texture) => {
+      const plane = this.third.add.plane({ width: 1024, height: 768 }, texture)
+      plane.position.set(0, 0, -100) // Posiciona el plano detrás de los personajes 3D
+      plane.scale.set(1.05, 1.05, 1) // Ajusta el tamaño si es necesario
+    })
+
+    // Configurar la cámara
+    this.third.camera.position.set(0, 8, 20)
+    this.third.camera.lookAt(20, 0, 0)
+
+    // // Desactivar los controles de la cámara si existen
+    // if (this.third.controls && this.third.controls.enabled !== undefined) {
+    //   this.third.controls.enabled = false
+    // }
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1)
+    this.third.scene.add(ambientLight)
 
     this.characters = new Characters(this)
     await this.characters.loadCharacters()
@@ -250,6 +268,8 @@ export default class GameScene extends Scene3D {
   }
 
   update (time, delta) {
-    this.characters.update(delta)
+    if (this.characters) {
+      this.characters.update(delta)
+    }
   }
 }
