@@ -7,14 +7,31 @@ export default class Characters {
     this.models = {}
     this.mixers = {}
     this.animations = {}
+    this.scales = {
+      mario: 0.2,
+      luigi: 0.24,
+      dk: 0.24,
+      daisy: 0.23
+    }
+  }
+
+  setCharacterScale (character, scale) {
+    if (Object.prototype.hasOwnProperty.call(this.scales, character)) {
+      this.scales[character] = scale
+      if (this.models[character]) {
+        this.models[character].scale.set(scale, scale, scale)
+      }
+    } else {
+      console.warn(`Character ${character} not found`)
+    }
   }
 
   async loadCharacters () {
     const positions = [
-      { x: -8, y: 3, z: 0 }, // Posición para Mario
-      { x: -3, y: 3, z: 0 }, // Posición para Luigi
-      { x: 2, y: 3, z: 0 }, // Posición para DK
-      { x: 7, y: 3, z: 0 } // Posición para Daisy
+      { x: -4.75, y: 1, z: 0 }, // Posición para Mario
+      { x: -1.5, y: 1, z: 0 }, // Posición para Luigi
+      { x: 1.75, y: 0.9, z: 0 }, // Posición para DK
+      { x: 5, y: 1, z: 0 } // Posición para Daisy
     ]
     const promises = this.characters.map((char, index) =>
       this.loadCharacter(char, positions[index].x, positions[index].y, positions[index].z)
@@ -25,7 +42,7 @@ export default class Characters {
   async loadCharacter (name, x, y, z) {
     const gltf = await this.scene.third.load.gltf(`assets/images/${name}.glb`)
     const model = gltf.scene
-    model.scale.set(0.5, 0.5, 0.5)
+    model.scale.set(this.scales[name], this.scales[name], this.scales[name])
     model.position.set(x, y, z)
     this.scene.third.add.existing(model)
 

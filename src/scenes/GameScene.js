@@ -14,10 +14,14 @@ export default class GameScene extends Scene3D {
     this.answerTimer = null
     this.penaltyActive = false
     this.characters = null
+    this.cameraTarget = new THREE.Vector3(0, 5, 0)
   }
 
   init (data) {
-    this.accessThirdDimension()
+    this.accessThirdDimension({
+      enableXR: false,
+      ground: { createFloor: false }
+    })
     this.level = data.level
   }
 
@@ -42,34 +46,37 @@ export default class GameScene extends Scene3D {
   }
 
   async create () {
-    this.third.warpSpeed()
+    // Eliminar la llamada a warpSpeed y configurar manualmente lo necesario
+    this.third.renderer.setPixelRatio(1)
+    this.third.renderer.setSize(window.innerWidth, window.innerHeight)
 
-    // Crear una textura para la imagen de fondo
-    this.third.load.texture('background', 'assets/images/background.png', (texture) => {
-      const plane = this.third.add.plane({ width: 1024, height: 768 }, texture)
-      plane.position.set(0, 0, -100) // Posiciona el plano detrás de los personajes 3D
-      plane.scale.set(1.05, 1.05, 1) // Ajusta el tamaño si es necesario
-    })
+    if (!this.third.camera) {
+      console.error('Camera not initialized')
+      return
+    }
 
     // Configurar la cámara
     this.third.camera.position.set(0, 8, 20)
-    this.third.camera.lookAt(20, 0, 0)
+    this.updateCameraRotation()
 
-    // // Desactivar los controles de la cámara si existen
-    // if (this.third.controls && this.third.controls.enabled !== undefined) {
-    //   this.third.controls.enabled = false
-    // }
+    this.updateCameraPosition(0, 5, 10)
+    // Agregar un helper para visualizar el punto de enfoque (opcional, para depuración)
+    const targetHelper = new THREE.AxesHelper(1)
+    targetHelper.position.copy(this.cameraTarget)
+    this.third.scene.add(targetHelper)
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.8)
     this.third.scene.add(ambientLight)
 
     this.characters = new Characters(this)
     await this.characters.loadCharacters()
 
-    this.add.image(35, 525, 'pipe').setOrigin(0).setScale(0.5)
-    this.add.image(240, 525, 'pipe').setOrigin(0).setScale(0.5)
-    this.add.image(450, 525, 'pipe').setOrigin(0).setScale(0.5)
-    this.add.image(650, 525, 'pipe').setOrigin(0).setScale(0.5)
+    this.addBackground()
+
+    this.add.image(35, 555, 'pipe').setOrigin(0).setScale(0.5)
+    this.add.image(240, 555, 'pipe').setOrigin(0).setScale(0.5)
+    this.add.image(450, 555, 'pipe').setOrigin(0).setScale(0.5)
+    this.add.image(650, 555, 'pipe').setOrigin(0).setScale(0.5)
 
     const boardHeight = this.textures.get('board').getSourceImage().height
     const squareCloudHeight = this.textures
@@ -86,15 +93,15 @@ export default class GameScene extends Scene3D {
       .setOrigin(0)
       .setScale(1.1)
 
-    this.add.image(60, 330, 'question-box').setOrigin(0).setScale(0.37)
-    this.add.image(265, 330, 'question-box').setOrigin(0).setScale(0.37)
-    this.add.image(475, 330, 'question-box').setOrigin(0).setScale(0.37)
-    this.add.image(680, 330, 'question-box').setOrigin(0).setScale(0.37)
+    this.add.image(60, 330, 'question-box').setOrigin(0).setScale(0.32)
+    this.add.image(265, 330, 'question-box').setOrigin(0).setScale(0.32)
+    this.add.image(475, 330, 'question-box').setOrigin(0).setScale(0.32)
+    this.add.image(680, 330, 'question-box').setOrigin(0).setScale(0.32)
 
-    this.add.image(65, 275, 'mushroom').setOrigin(0).setScale(0.3)
-    this.add.image(270, 275, 'mushroom').setOrigin(0).setScale(0.3)
-    this.add.image(480, 275, 'mushroom').setOrigin(0).setScale(0.3)
-    this.add.image(685, 275, 'mushroom').setOrigin(0).setScale(0.3)
+    this.add.image(70, 295, 'mushroom').setOrigin(0).setScale(0.2)
+    this.add.image(275, 295, 'mushroom').setOrigin(0).setScale(0.2)
+    this.add.image(485, 295, 'mushroom').setOrigin(0).setScale(0.2)
+    this.add.image(690, 295, 'mushroom').setOrigin(0).setScale(0.2)
 
     const allQuestions = this.cache.json.get('questions')
     this.questions = allQuestions[`level${this.level}`]
@@ -177,6 +184,43 @@ export default class GameScene extends Scene3D {
     } else {
       this.penaltyText.setText('')
     }
+  }
+
+  updateCameraRotation () {
+    if (this.third && this.third.camera) {
+      const camera = this.third.camera
+      const direction = new THREE.Vector3()
+      direction.subVectors(this.cameraTarget, camera.position).normalize()
+
+      // Calcular la rotación en el eje vertical (y)
+      camera.rotation.y = Math.atan2(-direction.x, -direction.z)
+
+      // Calcular la rotación en el eje horizontal (x)
+      const distance = Math.sqrt(direction.x * direction.x + direction.z * direction.z)
+      camera.rotation.x = Math.atan2(direction.y, distance)
+    } else {
+      console.warn('Camera or third is not initialized')
+    }
+  }
+
+  updateCameraPosition (x, y, z) {
+    if (this.third && this.third.camera) {
+      this.third.camera.position.set(x, y, z)
+      this.updateCameraRotation()
+    } else {
+      console.warn('Camera or third is not initialized')
+    }
+  }
+
+  addBackground () {
+    const loader = new THREE.TextureLoader()
+    const texture = loader.load('assets/images/background.png')
+    const geometry = new THREE.PlaneGeometry(40, 30) // Ajusta el tamaño según sea necesario
+    const material = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide })
+    const plane = new THREE.Mesh(geometry, material)
+
+    plane.position.set(0, 5, -22) // Ajusta la posición según sea necesario
+    this.third.scene.add(plane)
   }
 
   showAnswers () {
