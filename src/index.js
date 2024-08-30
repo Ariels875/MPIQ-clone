@@ -3,6 +3,7 @@ import { enable3d, Canvas } from '@enable3d/phaser-extension'
 import MenuScene from './scenes/MenuScene'
 import Characters from './scenes/Characters'
 import GameScene from './scenes/GameScene'
+import './styles.css'
 
 const config = {
   type: Phaser.WEBGL,

@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   entry: './src/index.js',
@@ -22,20 +23,36 @@ module.exports = {
         }
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif|ogg|mp3|wav)$/i,
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif|ogg|mp3|wav)$/i,
         type: 'asset/resource'
+      },
+      {
+        test: /\.svg$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/[name][ext]'
+        }
       }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      filename: 'index.html'
+      filename: 'index.html',
+      favicon: './public/favicon.svg'
     }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: 'public/assets', to: 'assets' }
+        { from: 'public/assets', to: 'assets' },
+        { from: 'public/favicon.svg', to: 'favicon.svg' }
       ]
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'styles.css'
     })
   ],
   devServer: {
