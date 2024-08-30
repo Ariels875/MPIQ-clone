@@ -15,7 +15,7 @@ const config = {
     height: 600
   },
   scene: [MenuScene, GameScene, Characters],
-  ...Canvas()
+  ...Canvas({ antialias: true })
 }
 
 window.addEventListener('load', () => {

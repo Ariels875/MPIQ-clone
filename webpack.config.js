@@ -29,26 +29,17 @@ module.exports = {
       {
         test: /\.(png|jpg|jpeg|gif|ogg|mp3|wav)$/i,
         type: 'asset/resource'
-      },
-      {
-        test: /\.svg$/,
-        type: 'asset/resource',
-        generator: {
-          filename: 'assets/[name][ext]'
-        }
       }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      filename: 'index.html',
-      favicon: './public/favicon.svg'
+      filename: 'index.html'
     }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: 'public/assets', to: 'assets' },
-        { from: 'public/favicon.svg', to: 'favicon.svg' }
+        { from: 'public/assets', to: 'assets' }
       ]
     }),
     new MiniCssExtractPlugin({
@@ -57,7 +48,7 @@ module.exports = {
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, 'public')
+      directory: path.join(__dirname, 'dist')
     },
     compress: true,
     port: 8080
