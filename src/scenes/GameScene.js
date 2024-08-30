@@ -214,12 +214,54 @@ export default class GameScene extends Scene3D {
   addBackground () {
     const loader = new THREE.TextureLoader()
     const texture = loader.load('assets/images/background.png')
+
+    // Create a custom shader material
+    const vertexShader = `
+      varying vec2 vUv;
+      varying vec3 vNormal;
+      void main() {
+        vUv = uv;
+        vNormal = normalize(normalMatrix * normal);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `
+
+    const fragmentShader = `
+      uniform sampler2D map;
+      uniform vec3 lightColor;
+      uniform vec3 lightPosition;
+      varying vec2 vUv;
+      varying vec3 vNormal;
+      void main() {
+        vec4 texColor = texture2D(map, vUv);
+        vec3 lightDir = normalize(lightPosition - vNormal);
+        float diff = max(dot(vNormal, lightDir), 0.0);
+        vec3 diffuse = diff * lightColor;
+        gl_FragColor = vec4(texColor.rgb * (diffuse + 0.5), texColor.a);
+      }
+    `
+
+    const customMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        map: { value: texture },
+        lightColor: { value: new THREE.Color(0xffffff) },
+        lightPosition: { value: new THREE.Vector3(5, 5, 5) }
+      },
+      vertexShader,
+      fragmentShader,
+      side: THREE.DoubleSide
+    })
+
     const geometry = new THREE.PlaneGeometry(40, 30)
-    const material = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide })
-    const plane = new THREE.Mesh(geometry, material)
+    const plane = new THREE.Mesh(geometry, customMaterial)
 
     plane.position.set(0, 5, -22)
     this.third.scene.add(plane)
+
+    // Add a point light specifically for the background
+    const backgroundLight = new THREE.PointLight(0xffffff, 1, 100)
+    backgroundLight.position.set(5, 5, 5)
+    this.third.scene.add(backgroundLight)
   }
 
   showAnswers () {
