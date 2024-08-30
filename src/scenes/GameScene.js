@@ -28,7 +28,6 @@ export default class GameScene extends Scene3D {
   preload () {
     this.load.image('abutton', 'assets/images/abutton.png')
     this.load.image('acomment', 'assets/images/acomment.png')
-    this.load.image('background', 'assets/images/background.png')
     this.load.image('bbutton', 'assets/images/bbutton.png')
     this.load.image('bcomment', 'assets/images/bcomment.png')
     this.load.image('board', 'assets/images/board.png')
@@ -215,11 +214,11 @@ export default class GameScene extends Scene3D {
   addBackground () {
     const loader = new THREE.TextureLoader()
     const texture = loader.load('assets/images/background.png')
-    const geometry = new THREE.PlaneGeometry(40, 30) // Ajusta el tamaño según sea necesario
+    const geometry = new THREE.PlaneGeometry(40, 30)
     const material = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide })
     const plane = new THREE.Mesh(geometry, material)
 
-    plane.position.set(0, 5, -22) // Ajusta la posición según sea necesario
+    plane.position.set(0, 5, -22)
     this.third.scene.add(plane)
   }
 
@@ -275,8 +274,12 @@ export default class GameScene extends Scene3D {
   handleWrongAnswer () {
     console.log('Respuesta incorrecta')
     this.penaltyActive = true
-    this.time.delayedCall(7000 + 5000, () => {
+    this.characters.playAnimation('mario', 'stunned')
+    this.time.delayedCall(7000 + 2000, () => {
       this.penaltyActive = false
+    })
+    this.time.delayedCall(7000 + 6500, () => {
+      this.characters.playAnimation('mario', 'idle')
     })
   }
 

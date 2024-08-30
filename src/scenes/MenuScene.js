@@ -24,7 +24,7 @@ export default class MenuScene extends Phaser.Scene {
     const levelText = this.add.text(450, 150, this.selectedLevel, { fontSize: '32px', fill: '#fff' }).setOrigin(0.5)
 
     // Botones para cambiar el nivel
-    this.add.text(340, 175, '<-', { fontSize: '32px', fill: '#fff' })
+    this.add.text(340, 175, '<-', { fontSize: '32px', fill: '#fe0404' })
       .setInteractive()
       .on('pointerdown', () => {
         if (this.selectedLevel > 1) {
@@ -33,7 +33,7 @@ export default class MenuScene extends Phaser.Scene {
         }
       })
 
-    this.add.text(400, 175, '->', { fontSize: '32px', fill: '#fff' })
+    this.add.text(400, 175, '->', { fontSize: '32px', fill: '#fe0404' })
       .setInteractive()
       .on('pointerdown', () => {
         if (this.selectedLevel < 4) { // cantidad de niveles
