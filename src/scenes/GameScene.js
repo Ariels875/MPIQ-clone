@@ -6,7 +6,6 @@ export default class GameScene extends Scene3D {
     super('GameScene')
     this.questions = []
     this.currentQuestionIndex = 0
-    this.currentQuestionIndex = 0
     this.score = 0
     this.canAnswer = false
     this.buttonImages = []
@@ -59,10 +58,6 @@ export default class GameScene extends Scene3D {
     this.updateCameraRotation()
 
     this.updateCameraPosition(0, 5, 10)
-    // Agregar un helper para visualizar el punto de enfoque (opcional, para depuración)
-    const targetHelper = new THREE.AxesHelper(1)
-    targetHelper.position.copy(this.cameraTarget)
-    this.third.scene.add(targetHelper)
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.8)
     this.third.scene.add(ambientLight)
