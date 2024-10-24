@@ -1,9 +1,11 @@
 import { Scene3D, THREE } from '@enable3d/phaser-extension'
 import Characters from './Characters'
+import AudioManager from './AudioManager'
 
 export default class GameScene extends Scene3D {
   constructor () {
     super('GameScene')
+    this.audioManager = null
     this.questions = []
     this.currentQuestionIndex = 0
     this.score = 0
@@ -41,9 +43,14 @@ export default class GameScene extends Scene3D {
     this.load.image('zbutton', 'assets/images/zbutton.png')
     this.load.image('zcomment', 'assets/images/zcomment.png')
     this.load.json('questions', 'assets/data/questions.json')
+
+    this.audioManager = new AudioManager(this)
+    this.audioManager.preload()
   }
 
   async create () {
+    this.audioManager.create()
+
     // Eliminar la llamada a warpSpeed y configurar manualmente lo necesario
     this.third.renderer.setPixelRatio(1)
     this.third.renderer.setSize(window.innerWidth, window.innerHeight)
@@ -100,6 +107,7 @@ export default class GameScene extends Scene3D {
     const allQuestions = this.cache.json.get('questions')
     this.questions = allQuestions[`level${this.level}`]
 
+    this.audioManager.playSound('fallingCloud')
     this.tweens.add({
       targets: board,
       y: 65,

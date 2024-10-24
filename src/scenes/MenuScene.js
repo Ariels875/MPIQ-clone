@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import AudioManager from './AudioManager'
 
 export default class MenuScene extends Phaser.Scene {
   constructor () {
@@ -10,9 +11,13 @@ export default class MenuScene extends Phaser.Scene {
     // Cargar recursos necesarios para el menú
     this.load.image('background', 'assets/images/background.png')
     this.load.image('startButton', 'assets/images/startbtn.png')
+    this.audioManager = new AudioManager(this)
+    this.audioManager.preload()
   }
 
   create () {
+    // Efectos de sonido del menú
+    this.audioManager.create()
     // Agregar fondo
     this.add.image(0, 0, 'background').setOrigin(0).setScale(1.05)
 
@@ -29,6 +34,7 @@ export default class MenuScene extends Phaser.Scene {
       .on('pointerdown', () => {
         if (this.selectedLevel > 1) {
           this.selectedLevel--
+          this.audioManager.playSound('menuSelect')
           levelText.setText(this.selectedLevel)
         }
       })
@@ -38,6 +44,7 @@ export default class MenuScene extends Phaser.Scene {
       .on('pointerdown', () => {
         if (this.selectedLevel < 4) { // cantidad de niveles
           this.selectedLevel++
+          this.audioManager.playSound('menuSelect')
           levelText.setText(this.selectedLevel)
         }
       })
@@ -46,7 +53,10 @@ export default class MenuScene extends Phaser.Scene {
     this.add.image(392, 425, 'startButton')
       .setScale(0.75)
       .setInteractive()
-      .on('pointerdown', () => this.startGame())
+      .on('pointerdown', () => {
+        this.audioManager.playSound('gameStart')
+        this.startGame()
+      })
   }
 
   startGame () {
