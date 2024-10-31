@@ -44,6 +44,9 @@ export default class Characters {
     const model = gltf.scene
     model.scale.set(this.scales[name], this.scales[name], this.scales[name])
     model.position.set(x, y, z)
+
+    model.rotation.y = Math.PI
+
     this.scene.third.add.existing(model)
 
     this.models[name] = model

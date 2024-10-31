@@ -126,6 +126,11 @@ export default class GameScene extends Scene3D {
       }
     })
 
+    // Crear botones táctiles solo si es un dispositivo móvil/tablet
+    if (!this.sys.game.device.os.desktop) {
+      this.createTouchButtons()
+    }
+
     this.input.keyboard.on('keydown-A', () => this.handleAnswer(0))
     this.input.keyboard.on('keydown-B', () => this.handleAnswer(1))
     this.input.keyboard.on('keydown-Z', () => this.handleAnswer(2))
@@ -160,6 +165,67 @@ export default class GameScene extends Scene3D {
       })
       .setOrigin(0.5)
     this.showQuestion()
+  }
+
+  createTouchButtons () {
+    const buttonScale = 0.4
+    const buttonY = this.scale.height - 100 // Posición Y para todos los botones
+
+    // Crear botón A
+    const aButton = this.add.image(100, buttonY, 'abutton')
+      .setScale(buttonScale)
+      .setScrollFactor(0)
+      .setInteractive()
+      .setDepth(100)
+      .setAlpha(0.8)
+
+    // Crear botón B
+    const bButton = this.add.image(this.scale.width / 2, buttonY, 'bbutton')
+      .setScale(buttonScale)
+      .setScrollFactor(0)
+      .setInteractive()
+      .setDepth(100)
+      .setAlpha(0.8)
+
+    // Crear botón Z
+    const zButton = this.add.image(this.scale.width - 100, buttonY, 'zbutton')
+      .setScale(buttonScale)
+      .setScrollFactor(0)
+      .setInteractive()
+      .setDepth(100)
+      .setAlpha(0.8)
+
+    // Agregar eventos táctiles
+    aButton.on('pointerdown', () => {
+      aButton.setAlpha(1)
+      this.handleAnswer(0)
+    })
+    aButton.on('pointerup', () => aButton.setAlpha(0.8))
+    aButton.on('pointerout', () => aButton.setAlpha(0.8))
+
+    bButton.on('pointerdown', () => {
+      bButton.setAlpha(1)
+      this.handleAnswer(1)
+    })
+    bButton.on('pointerup', () => bButton.setAlpha(0.8))
+    bButton.on('pointerout', () => bButton.setAlpha(0.8))
+
+    zButton.on('pointerdown', () => {
+      zButton.setAlpha(1)
+      this.handleAnswer(2)
+    })
+    zButton.on('pointerup', () => zButton.setAlpha(0.8))
+    zButton.on('pointerout', () => zButton.setAlpha(0.8))
+
+    // Guardar referencia a los botones para poder destruirlos más tarde si es necesario
+    this.touchButtons = { aButton, bButton, zButton }
+  }
+
+  clearTouchButtons () {
+    if (this.touchButtons) {
+      Object.values(this.touchButtons).forEach(button => button.destroy())
+      this.touchButtons = null
+    }
   }
 
   startNextQuestion () {
@@ -349,6 +415,7 @@ export default class GameScene extends Scene3D {
   endGame () {
     this.clearTimers()
     this.clearAnswers()
+    this.clearTouchButtons()
     this.questionText.setText('')
     this.penaltyText.setText('')
     this.add
