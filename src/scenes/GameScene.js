@@ -16,14 +16,46 @@ export default class GameScene extends Scene3D {
     this.penaltyActive = false
     this.characters = null
     this.cameraTarget = new THREE.Vector3(0, 5, 0)
+    this.resizeHandler = this.handleResize.bind(this)
   }
 
   init (data) {
     this.accessThirdDimension({
       enableXR: false,
-      ground: { createFloor: false }
+      ground: { createFloor: false },
+      width: 800,
+      height: 600
     })
     this.level = data.level
+    window.addEventListener('resize', this.resizeHandler)
+  }
+
+  handleResize () {
+    if (!this.third || !this.third.renderer) return
+
+    // Get the game canvas
+    const gameCanvas = this.game.canvas
+    const width = gameCanvas.clientWidth
+    const height = gameCanvas.clientHeight
+
+    // Update Phaser's internal size
+    this.scale.resize(width, height)
+
+    // Update Three.js canvas size to match Phaser's canvas
+    this.third.renderer.setSize(width, height)
+    this.third.renderer.domElement.style.width = `${width}px`
+    this.third.renderer.domElement.style.height = `${height}px`
+
+    // Update camera aspect ratio
+    if (this.third.camera) {
+      this.third.camera.aspect = width / height
+      this.third.camera.updateProjectionMatrix()
+    }
+
+    // Force a single render to update the view
+    if (this.third.scene) {
+      this.third.renderer.render(this.third.scene, this.third.camera)
+    }
   }
 
   preload () {
@@ -50,10 +82,6 @@ export default class GameScene extends Scene3D {
 
   async create () {
     this.audioManager.create()
-
-    // Eliminar la llamada a warpSpeed y configurar manualmente lo necesario
-    this.third.renderer.setPixelRatio(1)
-    this.third.renderer.setSize(window.innerWidth, window.innerHeight)
 
     if (!this.third.camera) {
       console.error('Camera not initialized')

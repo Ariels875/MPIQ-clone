@@ -12,7 +12,9 @@ const config = {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     width: 800,
-    height: 600
+    height: 600,
+    parent: 'game',
+    expandParent: true
   },
   scene: [MenuScene, GameScene, Characters],
   ...Canvas({ antialias: true })
