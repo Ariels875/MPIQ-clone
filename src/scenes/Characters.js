@@ -40,34 +40,79 @@ export default class Characters {
   }
 
   async loadCharacter (name, x, y, z) {
-    const gltf = await this.scene.third.load.gltf(`assets/images/${name}.glb`)
-    const model = gltf.scene
-    model.scale.set(this.scales[name], this.scales[name], this.scales[name])
-    model.position.set(x, y, z)
+    try {
+      const gltf = await this.scene.third.load.gltf(`assets/images/${name}.glb`)
+      const model = gltf.scene
+      model.scale.set(this.scales[name], this.scales[name], this.scales[name])
+      model.position.set(x, y, z)
 
-    model.rotation.y = Math.PI
+      model.rotation.y = Math.PI
 
-    this.scene.third.add.existing(model)
+      this.scene.third.add.existing(model)
 
-    this.models[name] = model
-    this.mixers[name] = new AnimationMixer(model)
+      this.models[name] = model
+      this.mixers[name] = new AnimationMixer(model)
 
-    this.animations[name] = {
-      idle: this.mixers[name].clipAction(gltf.animations.find(clip => clip.name === 'idle')),
-      Answer: this.mixers[name].clipAction(gltf.animations.find(clip => clip.name === 'Answer')),
-      jump: this.mixers[name].clipAction(gltf.animations.find(clip => clip.name === 'jump')),
-      stunned: this.mixers[name].clipAction(gltf.animations.find(clip => clip.name === 'stunned'))
+      this.animations[name] = {
+        idle: this.mixers[name].clipAction(gltf.animations.find(clip => clip.name === 'idle')),
+        Answer: this.mixers[name].clipAction(gltf.animations.find(clip => clip.name === 'Answer')),
+        jump: this.mixers[name].clipAction(gltf.animations.find(clip => clip.name === 'jump')),
+        stunned: this.mixers[name].clipAction(gltf.animations.find(clip => clip.name === 'stunned'))
+      }
+
+      this.playAnimation(name, 'idle')
+    } catch (error) {
+      console.error(`Error loading character ${name}:`, error)
     }
-
-    this.playAnimation(name, 'idle')
   }
 
   playAnimation (character, animationName) {
-    Object.values(this.animations[character]).forEach(action => action.stop())
-    this.animations[character][animationName].play()
+    if (this.animations[character] && this.animations[character][animationName]) {
+      Object.values(this.animations[character]).forEach(action => action.stop())
+      this.animations[character][animationName].play()
+    }
   }
 
   update (delta) {
     Object.values(this.mixers).forEach(mixer => mixer.update(delta * 0.001))
+  }
+
+  cleanup () {
+    // Detener todas las animaciones
+    Object.values(this.animations).forEach(characterAnimations => {
+      Object.values(characterAnimations).forEach(action => {
+        if (action && action.stop) {
+          action.stop()
+        }
+      })
+    })
+
+    // Limpiar mixers
+    Object.values(this.mixers).forEach(mixer => {
+      mixer.stopAllAction()
+      mixer.uncacheRoot(mixer.getRoot())
+    })
+
+    // Eliminar modelos de la escena
+    Object.values(this.models).forEach(model => {
+      if (model && this.scene.third && this.scene.third.scene) {
+        this.scene.third.scene.remove(model)
+        model.traverse(child => {
+          if (child.geometry) child.geometry.dispose()
+          if (child.material) {
+            if (Array.isArray(child.material)) {
+              child.material.forEach(material => material.dispose())
+            } else {
+              child.material.dispose()
+            }
+          }
+        })
+      }
+    })
+
+    // Limpiar referencias
+    this.models = {}
+    this.mixers = {}
+    this.animations = {}
   }
 }

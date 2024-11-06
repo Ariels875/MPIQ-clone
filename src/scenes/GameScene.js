@@ -11,6 +11,9 @@ export default class GameScene extends Scene3D {
     this.score = 0
     this.canAnswer = false
     this.buttonImages = []
+    this.mushroomImage = null
+    this.commentImage = null
+    this.hasJumpedAnimation = false
     this.questionTimer = null
     this.answerTimer = null
     this.penaltyActive = false
@@ -20,12 +23,38 @@ export default class GameScene extends Scene3D {
   }
 
   init (data) {
+    this.currentQuestionIndex = 0
+    this.score = 0
+    this.canAnswer = false
+    this.buttonImages = []
+    this.hasJumpedAnimation = false
+    this.penaltyActive = false
+    this.questions = []
+    if (this.characters) {
+      this.characters.cleanup()
+      this.characters = null
+    }
+    if (this.third) {
+      while (this.third.scene && this.third.scene.children.length > 0) {
+        const object = this.third.scene.children[0]
+        this.third.scene.remove(object)
+        if (object.geometry) object.geometry.dispose()
+        if (object.material) {
+          if (Array.isArray(object.material)) {
+            object.material.forEach(material => material.dispose())
+          } else {
+            object.material.dispose()
+          }
+        }
+      }
+    }
     this.accessThirdDimension({
       enableXR: false,
       ground: { createFloor: false },
       width: 800,
       height: 600
     })
+    this.characters = new Characters(this)
     this.level = data.level
     window.addEventListener('resize', this.resizeHandler)
   }
@@ -65,13 +94,13 @@ export default class GameScene extends Scene3D {
     this.load.image('bcomment', 'assets/images/bcomment.png')
     this.load.image('board', 'assets/images/board.png')
     this.load.image('correctsign', 'assets/images/correctsign.png')
+    this.load.image('wrongsign', 'assets/images/wrongsign.png')
     this.load.image('mushroom', 'assets/images/mushroom.png')
     this.load.image('pipe', 'assets/images/pipe.png')
     this.load.image('question-box', 'assets/images/question-box.png')
     this.load.image('square-cloud', 'assets/images/square-cloud.png')
     this.load.image('star', 'assets/images/star.png')
     this.load.image('startbtn', 'assets/images/startbtn.png')
-    this.load.image('wrongsign', 'assets/images/wrongsign.png')
     this.load.image('zbutton', 'assets/images/zbutton.png')
     this.load.image('zcomment', 'assets/images/zcomment.png')
     this.load.json('questions', 'assets/data/questions.json')
@@ -81,6 +110,12 @@ export default class GameScene extends Scene3D {
   }
 
   async create () {
+    const allQuestions = this.cache.json.get('questions')
+    if (!allQuestions || !allQuestions[`level${this.level}`]) {
+      console.error('No se pudieron cargar las preguntas para el nivel:', this.level)
+      return this.scene.start('MenuScene') // Volver al menú si hay error
+    }
+    this.questions = allQuestions[`level${this.level}`]
     this.audioManager.create()
 
     if (!this.third.camera) {
@@ -107,6 +142,30 @@ export default class GameScene extends Scene3D {
     this.add.image(450, 555, 'pipe').setOrigin(0).setScale(0.5)
     this.add.image(650, 555, 'pipe').setOrigin(0).setScale(0.5)
 
+    this.marioComment = [
+      this.add.image(120, 460, 'acomment').setOrigin(0).setScale(0.5).setVisible(false),
+      this.add.image(120, 460, 'bcomment').setOrigin(0).setScale(0.5).setVisible(false),
+      this.add.image(120, 460, 'zcomment').setOrigin(0).setScale(0.5).setVisible(false)
+    ]
+
+    this.luigiComment = [
+      this.add.image(315, 460, 'acomment').setOrigin(0).setScale(0.5).setVisible(false),
+      this.add.image(315, 460, 'bcomment').setOrigin(0).setScale(0.5).setVisible(false),
+      this.add.image(315, 460, 'zcomment').setOrigin(0).setScale(0.5).setVisible(false)
+    ]
+
+    this.dkComment = [
+      this.add.image(525, 460, 'acomment').setOrigin(0).setScale(0.5).setVisible(false),
+      this.add.image(525, 460, 'bcomment').setOrigin(0).setScale(0.5).setVisible(false),
+      this.add.image(525, 460, 'zcomment').setOrigin(0).setScale(0.5).setVisible(false)
+    ]
+
+    this.daisyComment = [
+      this.add.image(715, 460, 'acomment').setOrigin(0).setScale(0.5).setVisible(false),
+      this.add.image(715, 460, 'bcomment').setOrigin(0).setScale(0.5).setVisible(false),
+      this.add.image(715, 460, 'zcomment').setOrigin(0).setScale(0.5).setVisible(false)
+    ]
+
     const boardHeight = this.textures.get('board').getSourceImage().height
     const squareCloudHeight = this.textures
       .get('square-cloud')
@@ -122,18 +181,17 @@ export default class GameScene extends Scene3D {
       .setOrigin(0)
       .setScale(1.1)
 
-    this.add.image(60, 330, 'question-box').setOrigin(0).setScale(0.32)
-    this.add.image(265, 330, 'question-box').setOrigin(0).setScale(0.32)
-    this.add.image(475, 330, 'question-box').setOrigin(0).setScale(0.32)
-    this.add.image(680, 330, 'question-box').setOrigin(0).setScale(0.32)
+    this.questionBoxes = [
+      this.add.image(60, 330, 'question-box').setOrigin(0).setScale(0.32),
+      this.add.image(265, 330, 'question-box').setOrigin(0).setScale(0.32),
+      this.add.image(475, 330, 'question-box').setOrigin(0).setScale(0.32),
+      this.add.image(680, 330, 'question-box').setOrigin(0).setScale(0.32)
+    ]
 
-    this.add.image(70, 295, 'mushroom').setOrigin(0).setScale(0.2)
-    this.add.image(275, 295, 'mushroom').setOrigin(0).setScale(0.2)
-    this.add.image(485, 295, 'mushroom').setOrigin(0).setScale(0.2)
-    this.add.image(690, 295, 'mushroom').setOrigin(0).setScale(0.2)
-
-    const allQuestions = this.cache.json.get('questions')
-    this.questions = allQuestions[`level${this.level}`]
+    this.mushroomImage = this.add.image(70, 295, 'mushroom').setOrigin(0).setScale(0.2).setVisible(false)
+    this.add.image(275, 295, 'mushroom').setOrigin(0).setScale(0.2).setVisible(false)
+    this.add.image(485, 295, 'mushroom').setOrigin(0).setScale(0.2).setVisible(false)
+    this.add.image(690, 295, 'mushroom').setOrigin(0).setScale(0.2).setVisible(false)
 
     this.audioManager.playSound('fallingCloud')
     this.tweens.add({
@@ -151,6 +209,7 @@ export default class GameScene extends Scene3D {
       delay: 500,
       onComplete: () => {
         this.startNextQuestion()
+        this.audioManager.playMusic('gameMusic')
       }
     })
 
@@ -162,14 +221,6 @@ export default class GameScene extends Scene3D {
     this.input.keyboard.on('keydown-A', () => this.handleAnswer(0))
     this.input.keyboard.on('keydown-B', () => this.handleAnswer(1))
     this.input.keyboard.on('keydown-Z', () => this.handleAnswer(2))
-
-    // Texto para la puntuación
-    this.scoreText = this.add.text(600, 20, 'Score: 0', {
-      fontSize: '24px',
-      fill: '#fe0404',
-      align: 'center',
-      wordWrap: { width: 450 }
-    })
 
     // Texto para la pregunta y respuestas
     this.questionText = this.add
@@ -259,6 +310,7 @@ export default class GameScene extends Scene3D {
   startNextQuestion () {
     this.clearTimers()
     this.clearAnswers()
+    this.mushroomImage.setVisible(false)
 
     if (this.currentQuestionIndex < this.questions.length) {
       this.showQuestion()
@@ -271,15 +323,14 @@ export default class GameScene extends Scene3D {
   }
 
   showQuestion () {
+    if (!this.questions || !this.questions[this.currentQuestionIndex]) {
+      console.error('No hay pregunta disponible en el índice:', this.currentQuestionIndex)
+      return this.endGame() // Terminar el juego si no hay preguntas disponibles
+    }
+
     const question = this.questions[this.currentQuestionIndex]
     this.questionText.setText(question.question)
     this.canAnswer = false
-
-    if (this.penaltyActive) {
-      this.penaltyText.setText('Penalización activada')
-    } else {
-      this.penaltyText.setText('')
-    }
   }
 
   updateCameraRotation () {
@@ -392,31 +443,144 @@ export default class GameScene extends Scene3D {
       this.canAnswer = false
       this.clearTimers()
       const question = this.questions[this.currentQuestionIndex]
-      if (index === question.correctAnswer) {
-        this.handleCorrectAnswer()
-      } else {
-        this.handleWrongAnswer()
+
+      if (!this.hasJumpedAnimation) {
+        this.characters.playAnimation('mario', 'jump')
+        this.hasJumpedAnimation = true
+
+        this.time.delayedCall(1000, () => {
+          this.hasJumpedAnimation = false
+          this.characters.animations.mario.jump.stop()
+          this.mushroomImage.setVisible(true)
+          this.audioManager.playSound('hitboxSong')
+          this.tweens.add({
+            targets: this.mushroomImage,
+            alpha: 1,
+            duration: 500,
+            ease: 'Linear'
+          })
+        })
+
+        this.time.delayedCall(1500, () => {
+          this.characters.playAnimation('mario', 'Answer')
+          if (index >= 0 && index < this.marioComment.length) {
+            this.marioComment[index].setVisible(true)
+          }
+        })
+
+        this.time.delayedCall(2700, () => {
+          this.characters.animations.mario.Answer.stop()
+          this.characters.playAnimation('mario', 'idle')
+        })
       }
-      this.currentQuestionIndex++
-      this.time.delayedCall(1000, () => {
-        this.startNextQuestion()
+
+      this.time.delayedCall(3000, () => {
+        if (index === question.correctAnswer) {
+          this.handleCorrectAnswer(index)
+        } else {
+          this.handleWrongAnswer(index)
+        }
       })
     }
   }
 
-  handleCorrectAnswer () {
+  handleCorrectAnswer (index) {
     this.score++
-    this.scoreText.setText(`Score: ${this.score}`)
+    this.audioManager.playSound('correctAnswer')
+
+    // Limpiar la pantalla de opciones
+    this.clearAnswers()
+
+    // Ocultar el comentario
+    if (index >= 0 && index < this.marioComment.length) {
+      this.marioComment[index].setVisible(false)
+    }
+
+    // Mostrar imagen de correcto
+    const correctSign = this.add.image(400, 200, 'correctsign')
+      .setOrigin(0.5)
+      .setScale(0.5)
+
+    // Programar la eliminación de la imagen
+    this.time.delayedCall(2000, () => {
+      correctSign.destroy()
+      this.currentQuestionIndex++
+      this.startNextQuestion()
+    })
+
     console.log('Respuesta correcta')
   }
 
-  handleWrongAnswer () {
+  handleWrongAnswer (index) {
     console.log('Respuesta incorrecta')
     this.penaltyActive = true
-    this.characters.playAnimation('mario', 'stunned')
+
+    // Limpiar la pantalla de opciones
+    this.clearAnswers()
+
+    // Ocultar el comentario
+    if (index >= 0 && index < this.marioComment.length) {
+      this.marioComment[index].setVisible(false)
+    }
+
+    this.audioManager.playSound('wrongAnswer')
+
+    // Guardar la posición original de la question-box
+    const questionBox = this.questionBoxes[0]
+    const originalY = questionBox.y
+    const originalX = questionBox.x
+
+    // Primer tween: mover la question-box hacia el personaje
+    this.tweens.add({
+      targets: questionBox,
+      y: 450,
+      x: 60,
+      duration: 300,
+      ease: 'Linear',
+      onComplete: () => {
+        // Efecto de "empujón" al personaje
+        if (this.characters.models.mario) {
+          this.tweens.add({
+            targets: this.characters.models.mario.position,
+            x: '+=30',
+            duration: 100,
+            yoyo: true,
+            ease: 'Power1'
+          })
+        }
+
+        // Segundo tween: devolver la question-box a su posición original
+        this.tweens.add({
+          targets: questionBox,
+          y: originalY,
+          x: originalX,
+          duration: 300,
+          ease: 'Linear',
+          onComplete: () => {
+            // Iniciamos la animación stunned
+            this.characters.playAnimation('mario', 'stunned')
+          }
+        })
+      }
+    })
+
+    // Mostrar imagen de incorrecto después de la animación de golpe
+    this.time.delayedCall(1500, () => {
+      const wrongSign = this.add.image(400, 200, 'wrongsign')
+        .setOrigin(0.5)
+        .setScale(0.5)
+
+      this.time.delayedCall(2000, () => {
+        wrongSign.destroy()
+        this.currentQuestionIndex++
+        this.startNextQuestion()
+      })
+    })
+
     this.time.delayedCall(7000 + 2000, () => {
       this.penaltyActive = false
     })
+
     this.time.delayedCall(7000 + 6500, () => {
       this.characters.playAnimation('mario', 'idle')
     })
@@ -441,17 +605,76 @@ export default class GameScene extends Scene3D {
   }
 
   endGame () {
+    // Limpiar elementos existentes
     this.clearTimers()
     this.clearAnswers()
     this.clearTouchButtons()
     this.questionText.setText('')
     this.penaltyText.setText('')
+
+    // Detener todas las animaciones y limpiar personajes
+    if (this.characters) {
+      this.characters.cleanup()
+    }
+
+    // Detener todos los sonidos actuales
+    this.audioManager.stopAll()
+
+    // Reproducir sonido según la puntuación
+    if (this.score > 5) {
+      this.audioManager.playSound('winSong')
+    } else {
+      this.audioManager.playSound('loseSong')
+    }
+
+    // Mostrar puntuación
     this.add
-      .text(400, 300, `Juego terminado. Puntuación: ${this.score}`, {
+      .text(400, 250, `Juego terminado. Puntuación: ${this.score}`, {
         fontSize: '32px',
         fill: '#fe0404'
       })
       .setOrigin(0.5)
+
+    // Crear botón de menú
+    const menuButton = this.add.text(400, 350, 'Menú', {
+      fontSize: '28px',
+      fill: '#fff',
+      backgroundColor: '#fe0404',
+      padding: { x: 20, y: 10 }
+    })
+      .setOrigin(0.5)
+      .setInteractive({ useHandCursor: true })
+      .on('pointerover', () => menuButton.setStyle({ fill: '#fe0404', backgroundColor: '#fff' }))
+      .on('pointerout', () => menuButton.setStyle({ fill: '#fff', backgroundColor: '#fe0404' }))
+      .on('pointerdown', () => {
+      // Limpiar la escena 3D
+        if (this.third) {
+        // Limpiar la escena three.js
+          while (this.third.scene.children.length > 0) {
+            const object = this.third.scene.children[0]
+            this.third.scene.remove(object)
+
+            if (object.geometry) object.geometry.dispose()
+            if (object.material) {
+              if (Array.isArray(object.material)) {
+                object.material.forEach(material => material.dispose())
+              } else {
+                object.material.dispose()
+              }
+            }
+          }
+
+          // Limpiar el renderer
+          this.third.renderer.dispose()
+        }
+
+        // Remover el evento resize
+        window.removeEventListener('resize', this.resizeHandler)
+
+        // Destruir la escena actual y comenzar la escena del menú
+        this.scene.stop()
+        this.scene.start('MenuScene')
+      })
   }
 
   update (time, delta) {
