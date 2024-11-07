@@ -247,8 +247,8 @@ export default class GameScene extends Scene3D {
   }
 
   createTouchButtons () {
-    const buttonScale = 0.4
-    const buttonY = this.scale.height - 100 // Posición Y para todos los botones
+    const buttonScale = 1.1
+    const buttonY = this.scale.height - 550 // Posición Y para todos los botones
 
     // Crear botón A
     const aButton = this.add.image(100, buttonY, 'abutton')
