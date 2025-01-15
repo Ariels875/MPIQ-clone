@@ -1,60 +1,60 @@
 {
     "level1": [
         {
-            "question": "¿Cuál es el nombre del fontanero rojo más famoso de los videojuegos?",
-            "answers": ["Mario", "Luigi", "Wario"],
+            "question": "¿Cuál es el título de la historia??",
+            "answers": ["Métodos anticonceptivos", "Métodos dietéticos", "Métodos de evaluación"],
             "correctAnswer": 0
         },
         {
-            "question": "¿Qué animal es Sonic en los videojuegos?",
-            "answers": ["Erizo", "Zorro", "Ratón"],
+            "question": "¿Menciona cuantos personajes aparecen en la historia?",
+            "answers": ["9", "8", "10"],
             "correctAnswer": 0
         },
         {
-            "question": "¿Cómo se llama el personaje principal de The Legend of Zelda?",
-            "answers": ["Link", "Zelda", "Ganon"],
-            "correctAnswer": 0
-        },
-        {
-            "question": "¿De qué color es Yoshi en su forma más común?",
-            "answers": ["Rojo", "Verde", "Azul"],
+            "question": "¿José y Juana eran?",
+            "answers": ["Compadres", "Vecinos", "Hermanos"],
             "correctAnswer": 1
         },
         {
-            "question": "¿Quién es el villano principal en la serie de juegos de Mario?",
-            "answers": ["Bowser", "Wario", "Donkey Kong"],
-            "correctAnswer": 0
-        },
-        {
-            "question": "¿Cuál es el nombre del hermano de Mario?",
-            "answers": ["Wario", "Luigi", "Toad"],
+            "question": "¿Cuál es el nombre de la mamá de Juana?",
+            "answers": ["Mercedes ", "Rosa", "José"],
             "correctAnswer": 1
         },
         {
-            "question": "¿Cómo se llama la princesa que Mario rescata con frecuencia?",
-            "answers": ["Peach", "Daisy", "Zelda"],
+            "question": "¿Cómo se llaman los chicos que se enamoraren en la historia?",
+            "answers": ["José y Juana", "Mercedes Juan", "José y Rosa"],
             "correctAnswer": 0
         },
         {
-            "question": "¿Qué objeto utiliza Mario para volverse invencible por un corto tiempo?",
-            "answers": ["Flor de fuego", "Estrella", "Champiñón"],
-            "correctAnswer": 1
-        },
-        {
-            "question": "¿Cuál es el nombre del rival de Sonic el erizo?",
-            "answers": ["Tails", "Knuckles", "Dr. Eggman"],
+            "question": "¿De que habló mamá con Juana y José?",
+            "answers": ["De que ya se iban a casar", "De que iban a tener un hijo", "De los métodos anticonceptivos"],
             "correctAnswer": 2
         },
         {
-            "question": "¿Cuál es el nombre del primer juego de Mario?",
-            "answers": ["Super Mario Bros.", "Donkey Kong", "Mario Kart"],
+            "question": "¿Cuántos métodos anticonceptivos menciona la historia?",
+            "answers": ["5", "1", "4"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "¿De qué material es el preservativo?",
+            "answers": ["Plástico", "Latex", "Cuero"],
+            "correctAnswer": 1
+        },
+        {
+            "question": "¿Cuantos preservativos menciona el texto?",
+            "answers": ["Solo Preservativo masculino", "Solo Preservativo femenino", "Preservativo masculino y femenino"],
+            "correctAnswer": 2
+        },
+        {
+            "question": "¿Como se llama el método anticonceptivo que debes utilizar una vez cada mes o una vez cada 3 meses?",
+            "answers": ["Implante", "Inyección", "Preservativo"],
             "correctAnswer": 1
         }
     ],
     "level2": [
         {
-            "question": "¿En qué año se lanzó el primer juego de Mario Party?",
-            "answers": ["1995", "1998", "2000"],
+            "question": "¿Como se llama el método anticonceptivo que debes utilizar una vez cada mes o una vez cada 3 meses?",
+            "answers": ["Implante", "Inyección", "Preservativo"],
             "correctAnswer": 1
         },
         {
