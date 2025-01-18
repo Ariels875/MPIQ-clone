@@ -621,7 +621,7 @@ export default class GameScene extends Scene3D {
     this.audioManager.stopAll()
 
     // Reproducir sonido según la puntuación
-    if (this.score > 5) {
+    if (this.score > 2) {
       this.audioManager.playSound('winSong')
     } else {
       this.audioManager.playSound('loseSong')

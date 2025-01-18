@@ -1,12 +1,151 @@
 {
+    "dialogs": {
+        "level1":[
+            "MÉTODOS ANTICONCEPTIVOS (hablar es cuidar)",
+            "Un día Juana llegaba a su casa del colegio, mientras caminaba observaba que unos nuevos vecinos estaban llegando a la casa del frente, a lo lejos pudo observar a un chico alto, rubio y de buen parecer quien robó su suspiro por un instante, Rosa, la madre de Juana se percata de esto y le pregunta:",
+            "Rosa: ¿Te gusta el chico del frente?",
+            "Juana: Noooo que va solo estaba viendo sus grandes muebles",
+            "Rosa solo deja pasar la oportunidad de hablar con su hija y continua su camino, pero ya piensa en hablar de un tema muy serio con su hija. Con el tiempo José encontró en una de sus caminatas a Juana y se enamoró al instante",
+            "José: Hola niña dime ¿cómo te llamas? ¿Quieres ser mi amiga?",
+            "Juana: Hola vecino, sabes hace mucho tiempo que te he visto llegar a la casa del frente, claro que me gustaría ser tu amiga",
+            "Al pasar las semanas, entre risas y miradas empezaron a forjar algo más que una simple amistad",
+            "José: Sabes hace mucho tiempo que pienso que podríamos ser algo más eeeee eeee no se como decirte esto",
+            "Juana: Si quiero ser tu novia",
+            "José: ¿Enserio? Que emoción siiiii",
+            "La pareja empezó a ser cada vez más cercanos y poco a poco los besos y las caricias eran más intensas, un día Rosa la mamá de Juana al ver que se iban acercando los dos jóvenes cada vez más se dispuso a conversar con ellos",
+            "José: Dime Juana ¿por qué quiere hablar tu mama con nosotros?",
+            "Juana: No sé, a mí tampoco me ha dicho nada",
+            "Rosa: Hola chicos, al ver que ustedes van en serio con su relación, quiero que hoy hablemos de algo muy importante, los métodos anticonceptivos",
+            "Juana: QUEEEÉ MAMAAAAÁ ¿Cómo puedes decir eso? Qué vergüenza",
+            "Rosa: Tranquila hija, ¿Acaso no han pensado en que una mala decisión puede llegar a cambiar su vida?",
+            "José: Sabes Juana creo que tu mami tiene razón, deberíamos hablar de este tema para mantener una relación saludable",
+            "Juana: Si tienes razón, pero ¿qué métodos existen para cuidarnos?",
+            "Rosa: Miren mis niños les voy a presentar varios.",
+            "Preservativo: Hola amiguitos yo soy su amigo de látex, me parezco a una funda que se coloca en el pene y tengo una eficiencia del 85 al 95 por ciento y también estoy junto a mi compañera el preservativo femenino y nuestra principal función es evitar que los espermatozoides lleguen al ovulo.",
+            "Inyección: Hola amiguitos yo soy una inyección que debes utilizar una vez cada mes o una vez cada 3 meses. Yo evito la ovulación y así evito el embarazo.",
+            "T de cobre: Hola amiguitos yo soy DIU un dispositivo intrauterino y mi principal función es evitar por un tiempo el embarazo, estoy hecha de plástico en forma de T, mi efectividad es superior al 98 por ciento y tengo un tiempo de durabilidad de 10 años",
+            "Pildoras: Hola amiguitos yo soy las píldoras anticonceptivas debes tomarme todos los días, produzco hormonas que modifican la manera en la que funciona el organismo y prevengo los embarazos.",
+            "Implante: nadie es más efectivo que yo",
+            "Preservativo: pero yo no soy invasivo",
+            "Rosa: Haber chicos no discutan, todos son importantes y estos métodos les pueden servir mucho, recuerden que tienen un futuro por delante. Y si lo hacen con responsabilidad no habrá consecuencias.",
+            "Juana: Que buena información, creo que debemos escoger un método para disfrutar de nuestra sexualidad.",
+            "José: Exacto Juana hagamos bien las cosas para proyectarnos a una relación saludable, gracias señora Rosa nos sacó de muchas dudas",
+            "Juana: Siiii mami gracias por involucrarte en mi vida, estoy muy feliz",
+            "Recuerden que hablar de métodos anticonceptivos con tus padres te ayudará a disfrutar mejor de tu relación y así evitarás embarazos no planificados y enfermedades de trasmisión sexual. Si te cuidas, cuidas tu futuro."
+        ],
+        "level2":[
+            "MÉTODOS ANTICONCEPTIVOS (hablar es cuidar)",
+            "Un día Juana llegaba a su casa del colegio, mientras caminaba observaba que unos nuevos vecinos estaban llegando a la casa del frente, a lo lejos pudo observar a un chico alto, rubio y de buen parecer quien robó su suspiro por un instante, Rosa, la madre de Juana se percata de esto y le pregunta:",
+            "Rosa: ¿Te gusta el chico del frente?",
+            "Juana: Noooo que va solo estaba viendo sus grandes muebles",
+            "Rosa solo deja pasar la oportunidad de hablar con su hija y continua su camino, pero ya piensa en hablar de un tema muy serio con su hija. Con el tiempo José encontró en una de sus caminatas a Juana y se enamoró al instante",
+            "José: Hola niña dime ¿cómo te llamas? ¿Quieres ser mi amiga?",
+            "Juana: Hola vecino, sabes hace mucho tiempo que te he visto llegar a la casa del frente, claro que me gustaría ser tu amiga",
+            "Al pasar las semanas, entre risas y miradas empezaron a forjar algo más que una simple amistad",
+            "José: Sabes hace mucho tiempo que pienso que podríamos ser algo más eeeee eeee no se como decirte esto",
+            "Juana: Si quiero ser tu novia",
+            "José: ¿Enserio? Que emoción siiiii",
+            "La pareja empezó a ser cada vez más cercanos y poco a poco los besos y las caricias eran más intensas, un día Rosa la mamá de Juana al ver que se iban acercando los dos jóvenes cada vez más se dispuso a conversar con ellos",
+            "José: Dime Juana ¿por qué quiere hablar tu mama con nosotros?",
+            "Juana: No sé, a mí tampoco me ha dicho nada",
+            "Rosa: Hola chicos, al ver que ustedes van en serio con su relación, quiero que hoy hablemos de algo muy importante, los métodos anticonceptivos",
+            "Juana: QUEEEÉ MAMAAAAÁ ¿Cómo puedes decir eso? Qué vergüenza",
+            "Rosa: Tranquila hija, ¿Acaso no han pensado en que una mala decisión puede llegar a cambiar su vida?",
+            "José: Sabes Juana creo que tu mami tiene razón, deberíamos hablar de este tema para mantener una relación saludable",
+            "Juana: Si tienes razón, pero ¿qué métodos existen para cuidarnos?",
+            "Rosa: Miren mis niños les voy a presentar varios.",
+            "Preservativo: Hola amiguitos yo soy su amigo de látex, me parezco a una funda que se coloca en el pene y tengo una eficiencia del 85 al 95 por ciento y también estoy junto a mi compañera el preservativo femenino y nuestra principal función es evitar que los espermatozoides lleguen al ovulo.",
+            "Inyección: Hola amiguitos yo soy una inyección que debes utilizar una vez cada mes o una vez cada 3 meses. Yo evito la ovulación y así evito el embarazo.",
+            "T de cobre: Hola amiguitos yo soy DIU un dispositivo intrauterino y mi principal función es evitar por un tiempo el embarazo, estoy hecha de plástico en forma de T, mi efectividad es superior al 98 por ciento y tengo un tiempo de durabilidad de 10 años",
+            "Pildoras: Hola amiguitos yo soy las píldoras anticonceptivas debes tomarme todos los días, produzco hormonas que modifican la manera en la que funciona el organismo y prevengo los embarazos.",
+            "Implante: nadie es más efectivo que yo",
+            "Preservativo: pero yo no soy invasivo",
+            "Rosa: Haber chicos no discutan, todos son importantes y estos métodos les pueden servir mucho, recuerden que tienen un futuro por delante. Y si lo hacen con responsabilidad no habrá consecuencias.",
+            "Juana: Que buena información, creo que debemos escoger un método para disfrutar de nuestra sexualidad.",
+            "José: Exacto Juana hagamos bien las cosas para proyectarnos a una relación saludable, gracias señora Rosa nos sacó de muchas dudas",
+            "Juana: Siiii mami gracias por involucrarte en mi vida, estoy muy feliz",
+            "Recuerden que hablar de métodos anticonceptivos con tus padres te ayudará a disfrutar mejor de tu relación y así evitarás embarazos no planificados y enfermedades de trasmisión sexual. Si te cuidas, cuidas tu futuro."
+        ],
+        "level3":[
+            "MÉTODOS ANTICONCEPTIVOS (hablar es cuidar)",
+            "Un día Juana llegaba a su casa del colegio, mientras caminaba observaba que unos nuevos vecinos estaban llegando a la casa del frente, a lo lejos pudo observar a un chico alto, rubio y de buen parecer quien robó su suspiro por un instante, Rosa, la madre de Juana se percata de esto y le pregunta:",
+            "Rosa: ¿Te gusta el chico del frente?",
+            "Juana: Noooo que va solo estaba viendo sus grandes muebles",
+            "Rosa solo deja pasar la oportunidad de hablar con su hija y continua su camino, pero ya piensa en hablar de un tema muy serio con su hija. Con el tiempo José encontró en una de sus caminatas a Juana y se enamoró al instante",
+            "José: Hola niña dime ¿cómo te llamas? ¿Quieres ser mi amiga?",
+            "Juana: Hola vecino, sabes hace mucho tiempo que te he visto llegar a la casa del frente, claro que me gustaría ser tu amiga",
+            "Al pasar las semanas, entre risas y miradas empezaron a forjar algo más que una simple amistad",
+            "José: Sabes hace mucho tiempo que pienso que podríamos ser algo más eeeee eeee no se como decirte esto",
+            "Juana: Si quiero ser tu novia",
+            "José: ¿Enserio? Que emoción siiiii",
+            "La pareja empezó a ser cada vez más cercanos y poco a poco los besos y las caricias eran más intensas, un día Rosa la mamá de Juana al ver que se iban acercando los dos jóvenes cada vez más se dispuso a conversar con ellos",
+            "José: Dime Juana ¿por qué quiere hablar tu mama con nosotros?",
+            "Juana: No sé, a mí tampoco me ha dicho nada",
+            "Rosa: Hola chicos, al ver que ustedes van en serio con su relación, quiero que hoy hablemos de algo muy importante, los métodos anticonceptivos",
+            "Juana: QUEEEÉ MAMAAAAÁ ¿Cómo puedes decir eso? Qué vergüenza",
+            "Rosa: Tranquila hija, ¿Acaso no han pensado en que una mala decisión puede llegar a cambiar su vida?",
+            "José: Sabes Juana creo que tu mami tiene razón, deberíamos hablar de este tema para mantener una relación saludable",
+            "Juana: Si tienes razón, pero ¿qué métodos existen para cuidarnos?",
+            "Rosa: Miren mis niños les voy a presentar varios.",
+            "Preservativo: Hola amiguitos yo soy su amigo de látex, me parezco a una funda que se coloca en el pene y tengo una eficiencia del 85 al 95 por ciento y también estoy junto a mi compañera el preservativo femenino y nuestra principal función es evitar que los espermatozoides lleguen al ovulo.",
+            "Inyección: Hola amiguitos yo soy una inyección que debes utilizar una vez cada mes o una vez cada 3 meses. Yo evito la ovulación y así evito el embarazo.",
+            "T de cobre: Hola amiguitos yo soy DIU un dispositivo intrauterino y mi principal función es evitar por un tiempo el embarazo, estoy hecha de plástico en forma de T, mi efectividad es superior al 98 por ciento y tengo un tiempo de durabilidad de 10 años",
+            "Pildoras: Hola amiguitos yo soy las píldoras anticonceptivas debes tomarme todos los días, produzco hormonas que modifican la manera en la que funciona el organismo y prevengo los embarazos.",
+            "Implante: nadie es más efectivo que yo",
+            "Preservativo: pero yo no soy invasivo",
+            "Rosa: Haber chicos no discutan, todos son importantes y estos métodos les pueden servir mucho, recuerden que tienen un futuro por delante. Y si lo hacen con responsabilidad no habrá consecuencias.",
+            "Juana: Que buena información, creo que debemos escoger un método para disfrutar de nuestra sexualidad.",
+            "José: Exacto Juana hagamos bien las cosas para proyectarnos a una relación saludable, gracias señora Rosa nos sacó de muchas dudas",
+            "Juana: Siiii mami gracias por involucrarte en mi vida, estoy muy feliz",
+            "Recuerden que hablar de métodos anticonceptivos con tus padres te ayudará a disfrutar mejor de tu relación y así evitarás embarazos no planificados y enfermedades de trasmisión sexual. Si te cuidas, cuidas tu futuro."
+        ],
+        "level4":[
+            "MÉTODOS ANTICONCEPTIVOS (hablar es cuidar)",
+            "Un día Juana llegaba a su casa del colegio, mientras caminaba observaba que unos nuevos vecinos estaban llegando a la casa del frente, a lo lejos pudo observar a un chico alto, rubio y de buen parecer quien robó su suspiro por un instante, Rosa, la madre de Juana se percata de esto y le pregunta:",
+            "Rosa: ¿Te gusta el chico del frente?",
+            "Juana: Noooo que va solo estaba viendo sus grandes muebles",
+            "Rosa solo deja pasar la oportunidad de hablar con su hija y continua su camino, pero ya piensa en hablar de un tema muy serio con su hija. Con el tiempo José encontró en una de sus caminatas a Juana y se enamoró al instante",
+            "José: Hola niña dime ¿cómo te llamas? ¿Quieres ser mi amiga?",
+            "Juana: Hola vecino, sabes hace mucho tiempo que te he visto llegar a la casa del frente, claro que me gustaría ser tu amiga",
+            "Al pasar las semanas, entre risas y miradas empezaron a forjar algo más que una simple amistad",
+            "José: Sabes hace mucho tiempo que pienso que podríamos ser algo más eeeee eeee no se como decirte esto",
+            "Juana: Si quiero ser tu novia",
+            "José: ¿Enserio? Que emoción siiiii",
+            "La pareja empezó a ser cada vez más cercanos y poco a poco los besos y las caricias eran más intensas, un día Rosa la mamá de Juana al ver que se iban acercando los dos jóvenes cada vez más se dispuso a conversar con ellos",
+            "José: Dime Juana ¿por qué quiere hablar tu mama con nosotros?",
+            "Juana: No sé, a mí tampoco me ha dicho nada",
+            "Rosa: Hola chicos, al ver que ustedes van en serio con su relación, quiero que hoy hablemos de algo muy importante, los métodos anticonceptivos",
+            "Juana: QUEEEÉ MAMAAAAÁ ¿Cómo puedes decir eso? Qué vergüenza",
+            "Rosa: Tranquila hija, ¿Acaso no han pensado en que una mala decisión puede llegar a cambiar su vida?",
+            "José: Sabes Juana creo que tu mami tiene razón, deberíamos hablar de este tema para mantener una relación saludable",
+            "Juana: Si tienes razón, pero ¿qué métodos existen para cuidarnos?",
+            "Rosa: Miren mis niños les voy a presentar varios.",
+            "Preservativo: Hola amiguitos yo soy su amigo de látex, me parezco a una funda que se coloca en el pene y tengo una eficiencia del 85 al 95 por ciento y también estoy junto a mi compañera el preservativo femenino y nuestra principal función es evitar que los espermatozoides lleguen al ovulo.",
+            "Inyección: Hola amiguitos yo soy una inyección que debes utilizar una vez cada mes o una vez cada 3 meses. Yo evito la ovulación y así evito el embarazo.",
+            "T de cobre: Hola amiguitos yo soy DIU un dispositivo intrauterino y mi principal función es evitar por un tiempo el embarazo, estoy hecha de plástico en forma de T, mi efectividad es superior al 98 por ciento y tengo un tiempo de durabilidad de 10 años",
+            "Pildoras: Hola amiguitos yo soy las píldoras anticonceptivas debes tomarme todos los días, produzco hormonas que modifican la manera en la que funciona el organismo y prevengo los embarazos.",
+            "Implante: nadie es más efectivo que yo",
+            "Preservativo: pero yo no soy invasivo",
+            "Rosa: Haber chicos no discutan, todos son importantes y estos métodos les pueden servir mucho, recuerden que tienen un futuro por delante. Y si lo hacen con responsabilidad no habrá consecuencias.",
+            "Juana: Que buena información, creo que debemos escoger un método para disfrutar de nuestra sexualidad.",
+            "José: Exacto Juana hagamos bien las cosas para proyectarnos a una relación saludable, gracias señora Rosa nos sacó de muchas dudas",
+            "Juana: Siiii mami gracias por involucrarte en mi vida, estoy muy feliz",
+            "Recuerden que hablar de métodos anticonceptivos con tus padres te ayudará a disfrutar mejor de tu relación y así evitarás embarazos no planificados y enfermedades de trasmisión sexual. Si te cuidas, cuidas tu futuro."
+        ]
+    },
     "level1": [
         {
-            "question": "¿Cuál es el título de la historia??",
+            "question": "¿Cuál es el título de la historia?",
             "answers": ["Métodos anticonceptivos", "Métodos dietéticos", "Métodos de evaluación"],
             "correctAnswer": 0
         },
         {
-            "question": "¿Menciona cuantos personajes aparecen en la historia?",
+            "question": "¿Cuáles son las características de José?",
+            "answers": ["Mediano, de buen parecer.", "Alto, rubio y de buen parecer.", "Pequeño, cabello negro."],
+            "correctAnswer": 1
+        },
+        {
+            "question": "¿Cuántos personajes aparecen en la historia?",
             "answers": ["9", "8", "10"],
             "correctAnswer": 0
         },
@@ -19,9 +158,11 @@
             "question": "¿Cuál es el nombre de la mamá de Juana?",
             "answers": ["Mercedes ", "Rosa", "José"],
             "correctAnswer": 1
-        },
+        }
+    ],
+    "level2": [
         {
-            "question": "¿Cómo se llaman los chicos que se enamoraren en la historia?",
+            "question": "¿Cómo se llaman los chicos que se enamoran en la historia?",
             "answers": ["José y Juana", "Mercedes Juan", "José y Rosa"],
             "correctAnswer": 0
         },
@@ -44,166 +185,59 @@
             "question": "¿Cuantos preservativos menciona el texto?",
             "answers": ["Solo Preservativo masculino", "Solo Preservativo femenino", "Preservativo masculino y femenino"],
             "correctAnswer": 2
-        },
-        {
-            "question": "¿Como se llama el método anticonceptivo que debes utilizar una vez cada mes o una vez cada 3 meses?",
-            "answers": ["Implante", "Inyección", "Preservativo"],
-            "correctAnswer": 1
-        }
-    ],
-    "level2": [
-        {
-            "question": "¿Como se llama el método anticonceptivo que debes utilizar una vez cada mes o una vez cada 3 meses?",
-            "answers": ["Implante", "Inyección", "Preservativo"],
-            "correctAnswer": 1
-        },
-        {
-            "question": "¿Cuál es el nombre del primer jefe en Super Mario 64?",
-            "answers": ["King Bob-omb", "Bowser", "Big Boo"],
-            "correctAnswer": 0
-        },
-        {
-            "question": "¿Qué consola presentó por primera vez a Mario Kart?",
-            "answers": ["Nintendo 64", "Super Nintendo", "GameCube"],
-            "correctAnswer": 1
-        },
-        {
-            "question": "¿Cuál es el nombre del planeta en el que se desarrolla Super Mario Galaxy?",
-            "answers": ["Mushroom Kingdom", "Mario World", "Planet Mario"],
-            "correctAnswer": 0
-        },
-        {
-            "question": "¿En qué juego aparece por primera vez Bowser Jr.?",
-            "answers": ["Super Mario Sunshine", "Mario Kart 64", "Super Mario 64"],
-            "correctAnswer": 0
-        },
-        {
-            "question": "¿Cuál es el poder de la flor de fuego en los juegos de Mario?",
-            "answers": ["Volar", "Lanzar bolas de fuego", "Hacerse grande"],
-            "correctAnswer": 1
-        },
-        {
-            "question": "¿Qué juego de Mario tiene una versión con tableros como un juego de mesa?",
-            "answers": ["Super Mario World", "Mario Party", "Mario Kart"],
-            "correctAnswer": 1
-        },
-        {
-            "question": "¿Qué consola de Nintendo fue la primera en tener gráficos en 3D?",
-            "answers": ["GameCube", "Nintendo 64", "Wii"],
-            "correctAnswer": 1
-        },
-        {
-            "question": "¿Cuál es el nombre del enemigo que siempre lleva un caparazón en la espalda?",
-            "answers": ["Goomba", "Koopa Troopa", "Shy Guy"],
-            "correctAnswer": 1
-        },
-        {
-            "question": "¿Qué juego popular de Mario involucra carreras de autos?",
-            "answers": ["Mario Kart", "Mario Tennis", "Mario Party"],
-            "correctAnswer": 0
         }
     ],
     "level3": [
         {
-            "question": "¿Qué item permite a Mario volar en Super Mario 64?",
-            "answers": ["La gorra alada", "La estrella", "El champiñón"],
-            "correctAnswer": 0
+            "question": "¿Cómo se llama el método anticonceptivo que debes utilizar una vez cada mes o una vez cada 3 meses?",
+            "answers": ["Implante", "Inyección", "Preservativo"],
+            "correctAnswer": 1
         },
         {
-            "question": "¿Cuál es el nombre del dinosaurio amigable de Mario?",
-            "answers": ["Yoshi", "Bowser", "Koopa"],
-            "correctAnswer": 0
+            "question": "¿Qué método es el que debes tomar todos los días a la misma hora sin fallar?",
+            "answers": ["T de cobre", "Implante", "Píldoras"],
+            "correctAnswer": 2
         },
         {
-            "question": "¿Qué juego de Mario incluye un gorro que da habilidades especiales?",
-            "answers": ["Super Mario Odyssey", "Super Mario World", "Mario Kart 8"],
-            "correctAnswer": 0
+            "question": "¿Cuál es el dispositivo intrauterino y mi principal función es evitar por un tiempo el embarazo, estoy hecha de plástico en forma de T?",
+            "answers": ["Píldoras ", "T de cobre", "Inyección"],
+            "correctAnswer": 1
         },
         {
-            "question": "¿Cuál es el nombre del videojuego en el que Mario viaja a través de cuadros mágicos?",
-            "answers": ["Super Mario 64", "Super Mario Sunshine", "Super Mario Bros. 3"],
-            "correctAnswer": 0
+            "question": "¿Cómo se llama el método anticonceptivo que tiene forma de varilla, me implantan bajo un brazo y evito los embarazos por un tiempo prolongado?",
+            "answers": ["Preservativo", "Implante", "Inyección"],
+            "correctAnswer": 1
         },
         {
-            "question": "¿Cuál es el nombre del villano en la serie de juegos Donkey Kong Country?",
-            "answers": ["King K. Rool", "Bowser", "Ganondorf"],
-            "correctAnswer": 0
-        },
-        {
-            "question": "¿En qué juego de Mario se introdujo a Rosalina?",
-            "answers": ["Super Mario Galaxy", "Super Mario 3D World", "Mario Kart 8"],
-            "correctAnswer": 0
-        },
-        {
-            "question": "¿Qué objeto hace a Mario invencible temporalmente?",
-            "answers": ["La estrella", "La flor de fuego", "El caparazón azul"],
-            "correctAnswer": 0
-        },
-        {
-            "question": "¿Qué personaje es conocido como el mejor amigo de Sonic?",
-            "answers": ["Tails", "Knuckles", "Amy"],
-            "correctAnswer": 0
-        },
-        {
-            "question": "¿Cuál es el nombre del primer videojuego de Yoshi?",
-            "answers": ["Yoshi's Island", "Yoshi's Story", "Yoshi's Woolly World"],
-            "correctAnswer": 0
-        },
-        {
-            "question": "¿Qué juego de Mario incluye un modo de juego llamado 'Fiebre del oro'?",
-            "answers": ["New Super Mario Bros. 2", "Super Mario Odyssey", "Super Mario 3D Land"],
-            "correctAnswer": 0
+            "question": "¿Es cierto que la píldora tiene una eficiencia del 85 al 95 por ciento y también estoy junto a mi compañera el preservativo femenino y nuestra principal función es evitar que los espermatozoides lleguen al óvulo?",
+            "answers": ["Sí", "No", "Tal vez"],
+            "correctAnswer": 1
         }
     ],
     "level4": [
         {
-            "question": "¿En qué juego de Mario se introduce a Bowser Jr.?",
-            "answers": ["Super Mario Sunshine", "Super Mario Galaxy", "Super Mario 3D World"],
-            "correctAnswer": 0
-        },
-        {
-            "question": "¿Cuál es el nombre del principal antagonista en Super Mario Galaxy?",
-            "answers": ["Bowser", "King Boo", "Kamek"],
-            "correctAnswer": 0
-        },
-        {
-            "question": "¿En qué consola apareció por primera vez 'Super Mario Sunshine'?",
-            "answers": ["Nintendo GameCube", "Nintendo 64", "Wii"],
-            "correctAnswer": 0
-        },
-        {
-            "question": "¿Cuál es el nombre del rey de los Koopas?",
-            "answers": ["Bowser", "King Boo", "Wario"],
-            "correctAnswer": 0
-        },
-        {
-            "question": "¿En qué juego de Mario se introdujo el caparazón azul?",
-            "answers": ["Mario Kart 64", "Super Mario 64", "Super Mario Sunshine"],
-            "correctAnswer": 0
-        },
-        {
-            "question": "¿Cuál es el nombre del primer juego de rol (RPG) de Mario?",
-            "answers": ["Super Mario RPG", "Paper Mario", "Mario & Luigi: Superstar Saga"],
-            "correctAnswer": 0
-        },
-        {
-            "question": "¿En qué juego de Mario se introdujo la mecánica de viaje en el tiempo?",
-            "answers": ["Super Mario Odyssey", "Super Mario 3D World", "Mario & Luigi: Partners in Time"],
+            "question": "La efectividad del método anticonceptivo de la T de cobre es superior al 98 por ciento y tengo un tiempo de durabilidad es de ……….?",
+            "answers": ["11 años", "15 años", "10 años"],
             "correctAnswer": 2
         },
         {
-            "question": "¿Cuál es el nombre del primer juego de Mario en 3D?",
-            "answers": ["Super Mario 64", "Super Mario World", "Super Mario Bros. 3"],
+            "question": "¿La efectividad del implante es superior al …………?",
+            "answers": ["99. 5 %", "90. 1 %", "95. 5 %"],
             "correctAnswer": 0
         },
         {
-            "question": "¿Qué personaje femenino es conocida por ayudar a Mario en Super Mario Galaxy?",
-            "answers": ["Rosalina", "Peach", "Daisy"],
+            "question": "¿Crees que los padres deben hablar de los métodos anticonceptivos con los hijos?",
+            "answers": ["Si es importante", "Nunca lo permitiría", "No lo necesito"],
             "correctAnswer": 0
         },
         {
-            "question": "¿Cuál es el nombre del planeta principal en Super Mario Galaxy 2?",
-            "answers": ["Starship Mario", "Planet Popstar", "Dino Piranha"],
+            "question": "¿A qué edad crees conveniente que los chicos conozcan de los métodos anticonceptivos?",
+            "answers": ["En la adultez", "En la vejez", "A edad temprana"],
+            "correctAnswer": 2
+        },
+        {
+            "question": "¿Por qué debes utilizar métodos anticonceptivos?",
+            "answers": ["Porque así evitarás embarazos no planificados y enfermedades de trasmisión sexual", "Porque evitarás embarazos planificados.", "Porque no evitaras enfermedades de trasmisión sexual."],
             "correctAnswer": 0
         }
     ]
