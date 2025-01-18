@@ -23,8 +23,8 @@ export default class MenuScene extends Phaser.Scene {
 
   createInitialMenu () {
     // Título
-    this.title = this.add.text(390, 50, 'MPIQ', {
-      fontSize: '64px',
+    this.title = this.add.text(390, 50, 'Métodos Anticonceptivos', {
+      fontSize: '48px',
       fill: '#fff'
     }).setOrigin(0.5)
 
