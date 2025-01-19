@@ -17,9 +17,10 @@ export default class GameScene extends Scene3D {
     this.questionTimer = null
     this.answerTimer = null
     this.penaltyActive = false
-    this.characters = null
     this.cameraTarget = new THREE.Vector3(0, 5, 0)
     this.resizeHandler = this.handleResize.bind(this)
+    this.isFirstGame = true
+    this.isSceneInitialized = false
   }
 
   init (data) {
@@ -30,31 +31,46 @@ export default class GameScene extends Scene3D {
     this.hasJumpedAnimation = false
     this.penaltyActive = false
     this.questions = []
-    if (this.characters) {
-      this.characters.cleanup()
-      this.characters = null
-    }
+
     if (this.third) {
+      // Dispose of existing renderer
+      this.third.renderer.dispose()
+
+      // Clear all textures and materials from cache
+      THREE.Cache.clear()
+
+      // Remove all objects from scene
       while (this.third.scene && this.third.scene.children.length > 0) {
         const object = this.third.scene.children[0]
         this.third.scene.remove(object)
         if (object.geometry) object.geometry.dispose()
         if (object.material) {
           if (Array.isArray(object.material)) {
-            object.material.forEach(material => material.dispose())
+            object.material.forEach(material => {
+              if (material.map) material.map.dispose()
+              material.dispose()
+            })
           } else {
+            if (object.material.map) object.material.map.dispose()
             object.material.dispose()
           }
         }
       }
+      this.third.dispose()
     }
+
     this.accessThirdDimension({
       enableXR: false,
       ground: { createFloor: false },
       width: 800,
       height: 600
     })
+
+    if (this.characters) {
+      this.characters.cleanup()
+    }
     this.characters = new Characters(this)
+
     this.level = data.level
     window.addEventListener('resize', this.resizeHandler)
   }
@@ -118,24 +134,27 @@ export default class GameScene extends Scene3D {
     this.questions = allQuestions[`level${this.level}`]
     this.audioManager.create()
 
-    if (!this.third.camera) {
+    if (this.third && this.third.camera) {
+      // Configurar la cámara
+      this.third.camera.position.set(0, 8, 20)
+      this.updateCameraRotation()
+      this.updateCameraPosition(0, 5, 10)
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 1.8)
+      this.third.scene.add(ambientLight)
+
+      // Esperar a que los personajes se carguen
+      try {
+        await this.characters.loadCharacters()
+      } catch (error) {
+        console.error('Error loading characters:', error)
+      }
+
+      this.addBackground()
+    } else {
       console.error('Camera not initialized')
-      return
+      return this.scene.start('MenuScene')
     }
-
-    // Configurar la cámara
-    this.third.camera.position.set(0, 8, 20)
-    this.updateCameraRotation()
-
-    this.updateCameraPosition(0, 5, 10)
-
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.8)
-    this.third.scene.add(ambientLight)
-
-    this.characters = new Characters(this)
-    await this.characters.loadCharacters()
-
-    this.addBackground()
 
     this.add.image(35, 555, 'pipe').setOrigin(0).setScale(0.5)
     this.add.image(240, 555, 'pipe').setOrigin(0).setScale(0.5)
@@ -604,18 +623,13 @@ export default class GameScene extends Scene3D {
     this.answerTexts.forEach((text) => text.setText(''))
   }
 
-  endGame () {
+  async endGame () {
     // Limpiar elementos existentes
     this.clearTimers()
     this.clearAnswers()
     this.clearTouchButtons()
     this.questionText.setText('')
     this.penaltyText.setText('')
-
-    // Detener todas las animaciones y limpiar personajes
-    if (this.characters) {
-      this.characters.cleanup()
-    }
 
     // Detener todos los sonidos actuales
     this.audioManager.stopAll()
