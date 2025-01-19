@@ -17,9 +17,17 @@ export default class GameScene extends Scene3D {
     this.questionTimer = null
     this.answerTimer = null
     this.penaltyActive = false
-    this.characters = null
+    if (!this.characters) { this.characters = null }
     this.cameraTarget = new THREE.Vector3(0, 5, 0)
     this.resizeHandler = this.handleResize.bind(this)
+    this.characterPositions = {
+      mario: { x: 0, y: 0, z: 0 },
+      luigi: { x: 0, y: 0, z: 0 },
+      dk: { x: 0, y: 0, z: 0 },
+      daisy: { x: 0, y: 0, z: 0 }
+    }
+    this.isFirstGame = true
+    this.isSceneInitialized = false
   }
 
   init (data) {
@@ -30,10 +38,7 @@ export default class GameScene extends Scene3D {
     this.hasJumpedAnimation = false
     this.penaltyActive = false
     this.questions = []
-    if (this.characters) {
-      this.characters.cleanup()
-      this.characters = null
-    }
+
     if (this.third) {
       while (this.third.scene && this.third.scene.children.length > 0) {
         const object = this.third.scene.children[0]
@@ -48,15 +53,72 @@ export default class GameScene extends Scene3D {
         }
       }
     }
-    this.accessThirdDimension({
-      enableXR: false,
-      ground: { createFloor: false },
-      width: 800,
-      height: 600
-    })
-    this.characters = new Characters(this)
+
+    if (!this.isSceneInitialized) {
+      this.accessThirdDimension({
+        enableXR: false,
+        ground: { createFloor: false },
+        width: 800,
+        height: 600
+      })
+      this.isSceneInitialized = true
+    }
+
+    if (this.characters && !this.isFirstGame) {
+      this.resetCharacterPositions()
+    } else {
+      this.characters = new Characters(this)
+      this.isFirstGame = false
+    }
+
     this.level = data.level
     window.addEventListener('resize', this.resizeHandler)
+  }
+
+  saveInitialPositions () {
+    if (this.characters && this.characters.models) {
+      Object.entries(this.characters.models).forEach(([character, model]) => {
+        if (model && model.position) {
+          this.characterPositions[character] = {
+            x: model.position.x,
+            y: model.position.y,
+            z: model.position.z
+          }
+        }
+      })
+    }
+  }
+
+  resetCharacterPositions () {
+    return new Promise((resolve) => {
+      if (!this.characters || !this.characters.models) {
+        resolve()
+        return
+      }
+
+      const movePromises = Object.entries(this.characters.models).map(([character, model]) => {
+        return new Promise((resolve) => {
+          if (model && model.position && this.characterPositions[character]) {
+            const originalPos = this.characterPositions[character]
+
+            // Create a tween to move the character
+            this.tweens.add({
+              targets: model.position,
+              x: originalPos.x,
+              y: originalPos.y,
+              z: originalPos.z,
+              duration: 1000,
+              ease: 'Power2',
+              onComplete: resolve
+            })
+          } else {
+            resolve()
+          }
+        })
+      })
+
+      Promise.all(movePromises).then(resolve)
+    })
   }
 
   handleResize () {
@@ -118,24 +180,32 @@ export default class GameScene extends Scene3D {
     this.questions = allQuestions[`level${this.level}`]
     this.audioManager.create()
 
-    if (!this.third.camera) {
+    // Asegurarse de que la cámara esté inicializada
+    if (this.third && this.third.camera) {
+      // Configurar la cámara
+      this.third.camera.position.set(0, 8, 20)
+      this.updateCameraRotation()
+      this.updateCameraPosition(0, 5, 10)
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 1.8)
+      this.third.scene.add(ambientLight)
+
+      // Cargar o resetear personajes
+      if (!this.characters.isLoaded) {
+        await this.characters.loadCharacters()
+        this.saveInitialPositions()
+      } else {
+        await this.resetCharacterPositions()
+      }
+
+      this.addBackground()
+
+      // Resto del código de create()...
+      // [Mantener el resto del método create igual]
+    } else {
       console.error('Camera not initialized')
-      return
+      return this.scene.start('MenuScene')
     }
-
-    // Configurar la cámara
-    this.third.camera.position.set(0, 8, 20)
-    this.updateCameraRotation()
-
-    this.updateCameraPosition(0, 5, 10)
-
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.8)
-    this.third.scene.add(ambientLight)
-
-    this.characters = new Characters(this)
-    await this.characters.loadCharacters()
-
-    this.addBackground()
 
     this.add.image(35, 555, 'pipe').setOrigin(0).setScale(0.5)
     this.add.image(240, 555, 'pipe').setOrigin(0).setScale(0.5)
@@ -604,18 +674,13 @@ export default class GameScene extends Scene3D {
     this.answerTexts.forEach((text) => text.setText(''))
   }
 
-  endGame () {
+  async endGame () {
     // Limpiar elementos existentes
     this.clearTimers()
     this.clearAnswers()
     this.clearTouchButtons()
     this.questionText.setText('')
     this.penaltyText.setText('')
-
-    // Detener todas las animaciones y limpiar personajes
-    if (this.characters) {
-      this.characters.cleanup()
-    }
 
     // Detener todos los sonidos actuales
     this.audioManager.stopAll()
@@ -625,6 +690,27 @@ export default class GameScene extends Scene3D {
       this.audioManager.playSound('winSong')
     } else {
       this.audioManager.playSound('loseSong')
+    }
+
+    // Mover personajes fuera de la pantalla
+    if (this.characters && this.characters.models) {
+      const moveOffScreenPromises = Object.entries(this.characters.models).map(([character, model]) => {
+        return new Promise((resolve) => {
+          if (model && model.position) {
+            this.tweens.add({
+              targets: model.position,
+              x: model.position.x - 20,
+              duration: 1500,
+              ease: 'Power2',
+              onComplete: resolve
+            })
+          } else {
+            resolve()
+          }
+        })
+      })
+
+      await Promise.all(moveOffScreenPromises)
     }
 
     // Mostrar puntuación
