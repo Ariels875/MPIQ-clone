@@ -49,7 +49,7 @@ export default class MenuScene extends Phaser.Scene {
     this.cleanup()
 
     // Título
-    const title = this.add.text(390, 50, 'MPIQ', {
+    const title = this.add.text(390, 50, 'Métodos Anticonceptivos', {
       fontSize: '64px',
       fill: '#fff'
     }).setOrigin(0.5)
