@@ -13,6 +13,31 @@ export default class Characters {
       dk: 0.24,
       daisy: 0.23
     }
+    this.isLoaded = false
+    this.loader = null
+  }
+
+  reset () {
+    // Limpiar todas las referencias y estado
+    this.cleanup()
+    this.models = {}
+    this.mixers = {}
+    this.animations = {}
+    this.isLoaded = false
+  }
+
+  ensureVisibility () {
+    Object.values(this.models).forEach(model => {
+      if (model) {
+        model.visible = true
+        // Asegurar que todos los child meshes también sean visibles
+        model.traverse(child => {
+          if (child.isMesh) {
+            child.visible = true
+          }
+        })
+      }
+    })
   }
 
   setCharacterScale (character, scale) {
@@ -27,26 +52,67 @@ export default class Characters {
   }
 
   async loadCharacters () {
+    if (this.isLoaded) {
+      this.ensureVisibility()
+      return
+    }
+
+    this.reset()
     const positions = [
-      { x: -4.75, y: 1, z: 0 }, // Posición para Mario
-      { x: -1.5, y: 1, z: 0 }, // Posición para Luigi
-      { x: 1.75, y: 0.9, z: 0 }, // Posición para DK
-      { x: 5, y: 1, z: 0 } // Posición para Daisy
+      { x: -4.75, y: 1, z: 0 },
+      { x: -1.5, y: 1, z: 0 },
+      { x: 1.75, y: 0.9, z: 0 },
+      { x: 5, y: 1, z: 0 }
     ]
-    const promises = this.characters.map((char, index) =>
-      this.loadCharacter(char, positions[index].x, positions[index].y, positions[index].z)
-    )
-    await Promise.all(promises)
+
+    try {
+      const promises = this.characters.map((char, index) =>
+        this.loadCharacter(char, positions[index].x, positions[index].y, positions[index].z)
+      )
+
+      await Promise.all(promises)
+      this.isLoaded = true
+    } catch (error) {
+      console.error('Failed to load all characters:', error)
+      this.isLoaded = false
+      throw error // Asegurarse de que isLoaded sea false si hay un error
+      // Opcional: reintentar la carga o manejar el error de otra manera
+    }
   }
 
   async loadCharacter (name, x, y, z) {
     try {
-      const gltf = await this.scene.third.load.gltf(`assets/images/${name}.glb`)
+      // Verificar que this.scene.third está disponible
+      if (!this.scene || !this.scene.third) {
+        throw new Error(`Three.js not initialized when loading ${name}`)
+      }
+
+      // Intentar cargar el modelo
+      const modelPath = `assets/images/${name}.glb`
+
+      // Ensure the path is properly formatted
+      const formattedPath = modelPath.replace(/\\/g, '/')
+
+      // Add cache busting to prevent stale cache issues
+      const cacheBuster = `?t=${Date.now()}`
+
+      // Load the model with cache busting
+      const gltf = await this.scene.third.load.gltf(formattedPath + cacheBuster)
+
+      if (!gltf || !gltf.scene) {
+        throw new Error(`Failed to load model for ${name}`)
+      }
       const model = gltf.scene
+      model.traverse(child => {
+        child.visible = true
+        if (child.isMesh) {
+          child.frustumCulled = false // Esto evita que Three.js oculte el modelo si está fuera de la vista
+        }
+      })
       model.scale.set(this.scales[name], this.scales[name], this.scales[name])
       model.position.set(x, y, z)
-
       model.rotation.y = Math.PI
+      model.visible = true
 
       this.scene.third.add.existing(model)
 
@@ -63,6 +129,7 @@ export default class Characters {
       this.playAnimation(name, 'idle')
     } catch (error) {
       console.error(`Error loading character ${name}:`, error)
+      throw error
     }
   }
 
@@ -93,16 +160,26 @@ export default class Characters {
       mixer.uncacheRoot(mixer.getRoot())
     })
 
-    // Eliminar modelos de la escena
+    // Eliminar modelos de la escena y limpiar recursos
     Object.values(this.models).forEach(model => {
-      if (model && this.scene.third && this.scene.third.scene) {
-        this.scene.third.scene.remove(model)
+      if (model) {
+        if (this.scene && this.scene.third && this.scene.third.scene) {
+          this.scene.third.scene.remove(model)
+        }
+
+        // Limpiar recursos de manera más exhaustiva
         model.traverse(child => {
-          if (child.geometry) child.geometry.dispose()
+          if (child.geometry) {
+            child.geometry.dispose()
+          }
           if (child.material) {
             if (Array.isArray(child.material)) {
-              child.material.forEach(material => material.dispose())
+              child.material.forEach(material => {
+                if (material.map) material.map.dispose()
+                material.dispose()
+              })
             } else {
+              if (child.material.map) child.material.map.dispose()
               child.material.dispose()
             }
           }
@@ -114,5 +191,9 @@ export default class Characters {
     this.models = {}
     this.mixers = {}
     this.animations = {}
+    this.isLoaded = false
+
+    // Asegurarse de que el loader también se reinicie
+    this.loader = null
   }
 }

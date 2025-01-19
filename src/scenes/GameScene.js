@@ -17,15 +17,8 @@ export default class GameScene extends Scene3D {
     this.questionTimer = null
     this.answerTimer = null
     this.penaltyActive = false
-    if (!this.characters) { this.characters = null }
     this.cameraTarget = new THREE.Vector3(0, 5, 0)
     this.resizeHandler = this.handleResize.bind(this)
-    this.characterPositions = {
-      mario: { x: 0, y: 0, z: 0 },
-      luigi: { x: 0, y: 0, z: 0 },
-      dk: { x: 0, y: 0, z: 0 },
-      daisy: { x: 0, y: 0, z: 0 }
-    }
     this.isFirstGame = true
     this.isSceneInitialized = false
   }
@@ -40,85 +33,46 @@ export default class GameScene extends Scene3D {
     this.questions = []
 
     if (this.third) {
+      // Dispose of existing renderer
+      this.third.renderer.dispose()
+
+      // Clear all textures and materials from cache
+      THREE.Cache.clear()
+
+      // Remove all objects from scene
       while (this.third.scene && this.third.scene.children.length > 0) {
         const object = this.third.scene.children[0]
         this.third.scene.remove(object)
         if (object.geometry) object.geometry.dispose()
         if (object.material) {
           if (Array.isArray(object.material)) {
-            object.material.forEach(material => material.dispose())
+            object.material.forEach(material => {
+              if (material.map) material.map.dispose()
+              material.dispose()
+            })
           } else {
+            if (object.material.map) object.material.map.dispose()
             object.material.dispose()
           }
         }
       }
+      this.third.dispose()
     }
 
-    if (!this.isSceneInitialized) {
-      this.accessThirdDimension({
-        enableXR: false,
-        ground: { createFloor: false },
-        width: 800,
-        height: 600
-      })
-      this.isSceneInitialized = true
-    }
+    this.accessThirdDimension({
+      enableXR: false,
+      ground: { createFloor: false },
+      width: 800,
+      height: 600
+    })
 
-    if (this.characters && !this.isFirstGame) {
-      this.resetCharacterPositions()
-    } else {
-      this.characters = new Characters(this)
-      this.isFirstGame = false
+    if (this.characters) {
+      this.characters.cleanup()
     }
+    this.characters = new Characters(this)
 
     this.level = data.level
     window.addEventListener('resize', this.resizeHandler)
-  }
-
-  saveInitialPositions () {
-    if (this.characters && this.characters.models) {
-      Object.entries(this.characters.models).forEach(([character, model]) => {
-        if (model && model.position) {
-          this.characterPositions[character] = {
-            x: model.position.x,
-            y: model.position.y,
-            z: model.position.z
-          }
-        }
-      })
-    }
-  }
-
-  resetCharacterPositions () {
-    return new Promise((resolve) => {
-      if (!this.characters || !this.characters.models) {
-        resolve()
-        return
-      }
-
-      const movePromises = Object.entries(this.characters.models).map(([character, model]) => {
-        return new Promise((resolve) => {
-          if (model && model.position && this.characterPositions[character]) {
-            const originalPos = this.characterPositions[character]
-
-            // Create a tween to move the character
-            this.tweens.add({
-              targets: model.position,
-              x: originalPos.x,
-              y: originalPos.y,
-              z: originalPos.z,
-              duration: 1000,
-              ease: 'Power2',
-              onComplete: resolve
-            })
-          } else {
-            resolve()
-          }
-        })
-      })
-
-      Promise.all(movePromises).then(resolve)
-    })
   }
 
   handleResize () {
@@ -180,7 +134,6 @@ export default class GameScene extends Scene3D {
     this.questions = allQuestions[`level${this.level}`]
     this.audioManager.create()
 
-    // Asegurarse de que la cámara esté inicializada
     if (this.third && this.third.camera) {
       // Configurar la cámara
       this.third.camera.position.set(0, 8, 20)
@@ -190,18 +143,14 @@ export default class GameScene extends Scene3D {
       const ambientLight = new THREE.AmbientLight(0xffffff, 1.8)
       this.third.scene.add(ambientLight)
 
-      // Cargar o resetear personajes
-      if (!this.characters.isLoaded) {
+      // Esperar a que los personajes se carguen
+      try {
         await this.characters.loadCharacters()
-        this.saveInitialPositions()
-      } else {
-        await this.resetCharacterPositions()
+      } catch (error) {
+        console.error('Error loading characters:', error)
       }
 
       this.addBackground()
-
-      // Resto del código de create()...
-      // [Mantener el resto del método create igual]
     } else {
       console.error('Camera not initialized')
       return this.scene.start('MenuScene')
@@ -690,27 +639,6 @@ export default class GameScene extends Scene3D {
       this.audioManager.playSound('winSong')
     } else {
       this.audioManager.playSound('loseSong')
-    }
-
-    // Mover personajes fuera de la pantalla
-    if (this.characters && this.characters.models) {
-      const moveOffScreenPromises = Object.entries(this.characters.models).map(([character, model]) => {
-        return new Promise((resolve) => {
-          if (model && model.position) {
-            this.tweens.add({
-              targets: model.position,
-              x: model.position.x - 20,
-              duration: 1500,
-              ease: 'Power2',
-              onComplete: resolve
-            })
-          } else {
-            resolve()
-          }
-        })
-      })
-
-      await Promise.all(moveOffScreenPromises)
     }
 
     // Mostrar puntuación
