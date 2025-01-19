@@ -11,6 +11,30 @@ export default class MenuScene extends Phaser.Scene {
       currentPart: 0,
       dialogParts: []
     }
+    this.menuElements = []
+    this.dialogElements = []
+  }
+
+  cleanup () {
+    // Limpiar elementos del menú
+    this.menuElements.forEach(element => {
+      if (element) element.destroy()
+    })
+    this.menuElements = []
+
+    // Limpiar elementos del diálogo
+    this.dialogElements.forEach(element => {
+      if (element) element.destroy()
+    })
+    this.dialogElements = []
+
+    // Resetear estado del diálogo
+    this.dialogState = {
+      isActive: false,
+      text: null,
+      currentPart: 0,
+      dialogParts: []
+    }
   }
 
   preload () {
@@ -22,25 +46,27 @@ export default class MenuScene extends Phaser.Scene {
   }
 
   createInitialMenu () {
+    this.cleanup()
+
     // Título
-    this.title = this.add.text(390, 50, 'Métodos Anticonceptivos', {
-      fontSize: '48px',
+    const title = this.add.text(390, 50, 'MPIQ', {
+      fontSize: '64px',
       fill: '#fff'
     }).setOrigin(0.5)
 
     // Selector de nivel
-    this.levelLabel = this.add.text(390, 150, 'Nivel: ', {
+    const levelLabel = this.add.text(390, 150, 'Nivel: ', {
       fontSize: '32px',
       fill: '#fff'
     }).setOrigin(0.5)
 
-    this.levelText = this.add.text(450, 150, this.selectedLevel, {
+    const levelText = this.add.text(450, 150, this.selectedLevel, {
       fontSize: '32px',
       fill: '#fff'
     }).setOrigin(0.5)
 
     // Botones de nivel
-    this.prevButton = this.add.text(340, 175, '<-', {
+    const prevButton = this.add.text(340, 175, '<-', {
       fontSize: '32px',
       fill: '#fe0404'
     })
@@ -49,11 +75,11 @@ export default class MenuScene extends Phaser.Scene {
         if (this.selectedLevel > 1) {
           this.selectedLevel--
           this.audioManager.playSound('menuSelect')
-          this.levelText.setText(this.selectedLevel)
+          levelText.setText(this.selectedLevel)
         }
       })
 
-    this.nextButton = this.add.text(400, 175, '->', {
+    const nextButton = this.add.text(400, 175, '->', {
       fontSize: '32px',
       fill: '#fe0404'
     })
@@ -62,18 +88,28 @@ export default class MenuScene extends Phaser.Scene {
         if (this.selectedLevel < 4) {
           this.selectedLevel++
           this.audioManager.playSound('menuSelect')
-          this.levelText.setText(this.selectedLevel)
+          levelText.setText(this.selectedLevel)
         }
       })
 
     // Botón de inicio
-    this.startButton = this.add.image(392, 425, 'startButton')
+    const startButton = this.add.image(392, 425, 'startButton')
       .setScale(0.75)
       .setInteractive()
       .on('pointerdown', () => {
         this.audioManager.playSound('menuSelect')
         this.startDialog()
       })
+
+    // Store all elements in menuElements array for cleanup
+    this.menuElements.push(
+      title,
+      levelLabel,
+      levelText,
+      prevButton,
+      nextButton,
+      startButton
+    )
   }
 
   create () {
@@ -97,11 +133,12 @@ export default class MenuScene extends Phaser.Scene {
   }
 
   startDialog () {
-    this.clearInitialMenu()
+    this.cleanup()
 
     // Crear fondo semitransparente para el diálogo
-    this.add.rectangle(0, 0, this.game.config.width, this.game.config.height, 0x000000, 0.7)
+    const dialogBg = this.add.rectangle(0, 0, this.game.config.width, this.game.config.height, 0x000000, 0.7)
       .setOrigin(0)
+    this.dialogElements.push(dialogBg)
 
     // Preparar el texto del diálogo desde questions.json
     const questions = this.cache.json.get('questions')
@@ -119,12 +156,14 @@ export default class MenuScene extends Phaser.Scene {
     this.dialogState.dialogParts = this.splitTextIntoParts(story, 350)
 
     // Crear el texto del diálogo
-    this.dialogState.text = this.add.text(50, 50, '', {
+    const dialogText = this.add.text(50, 50, '', {
       fontSize: '24px',
       fill: '#ffffff',
       wordWrap: { width: 700 },
       lineSpacing: 10
     })
+    this.dialogState.text = dialogText
+    this.dialogElements.push(dialogText)
 
     // Mostrar la primera parte del diálogo
     this.showNextDialogPart()
@@ -180,6 +219,8 @@ export default class MenuScene extends Phaser.Scene {
   }
 
   createAdvanceButton () {
+    if (this.startGameButton) this.startGameButton.destroy()
+    if (this.advanceButton) this.advanceButton.destroy()
     this.advanceButton = this.add.text(400, 500, 'Avanzar', {
       fontSize: '28px',
       fill: '#ffffff',
@@ -194,6 +235,7 @@ export default class MenuScene extends Phaser.Scene {
         this.audioManager.playSound('menuSelect')
         this.showNextDialogPart()
       })
+    this.dialogElements.push(this.advanceButton)
   }
 
   createStartGameButton () {
