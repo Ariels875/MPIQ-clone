@@ -1,202 +1,124 @@
 {
     "dialogs": {
         "level1":[
-            "MÉTODOS ANTICONCEPTIVOS (hablar es cuidar)",
-            "Un día Juana llegaba a su casa del colegio, mientras caminaba observaba que unos nuevos vecinos estaban llegando a la casa del frente, a lo lejos pudo observar a un chico alto, rubio y de buen parecer quien robó su suspiro por un instante, Rosa, la madre de Juana se percata de esto y le pregunta:",
-            "Rosa: ¿Te gusta el chico del frente?",
-            "Juana: Noooo que va solo estaba viendo sus grandes muebles",
-            "Rosa solo deja pasar la oportunidad de hablar con su hija y continua su camino, pero ya piensa en hablar de un tema muy serio con su hija. Con el tiempo José encontró en una de sus caminatas a Juana y se enamoró al instante",
-            "José: Hola niña dime ¿cómo te llamas? ¿Quieres ser mi amiga?",
-            "Juana: Hola vecino, sabes hace mucho tiempo que te he visto llegar a la casa del frente, claro que me gustaría ser tu amiga",
-            "Al pasar las semanas, entre risas y miradas empezaron a forjar algo más que una simple amistad",
-            "José: Sabes hace mucho tiempo que pienso que podríamos ser algo más eeeee eeee no se como decirte esto",
-            "Juana: Si quiero ser tu novia",
-            "José: ¿Enserio? Que emoción siiiii",
-            "La pareja empezó a ser cada vez más cercanos y poco a poco los besos y las caricias eran más intensas, un día Rosa la mamá de Juana al ver que se iban acercando los dos jóvenes cada vez más se dispuso a conversar con ellos",
-            "José: Dime Juana ¿por qué quiere hablar tu mama con nosotros?",
-            "Juana: No sé, a mí tampoco me ha dicho nada",
-            "Rosa: Hola chicos, al ver que ustedes van en serio con su relación, quiero que hoy hablemos de algo muy importante, los métodos anticonceptivos",
-            "Juana: QUEEEÉ MAMAAAAÁ ¿Cómo puedes decir eso? Qué vergüenza",
-            "Rosa: Tranquila hija, ¿Acaso no han pensado en que una mala decisión puede llegar a cambiar su vida?",
-            "José: Sabes Juana creo que tu mami tiene razón, deberíamos hablar de este tema para mantener una relación saludable",
-            "Juana: Si tienes razón, pero ¿qué métodos existen para cuidarnos?",
-            "Rosa: Miren mis niños les voy a presentar varios.",
-            "Preservativo: Hola amiguitos yo soy su amigo de látex, me parezco a una funda que se coloca en el pene y tengo una eficiencia del 85 al 95 por ciento y también estoy junto a mi compañera el preservativo femenino y nuestra principal función es evitar que los espermatozoides lleguen al ovulo.",
-            "Inyección: Hola amiguitos yo soy una inyección que debes utilizar una vez cada mes o una vez cada 3 meses. Yo evito la ovulación y así evito el embarazo.",
-            "T de cobre: Hola amiguitos yo soy DIU un dispositivo intrauterino y mi principal función es evitar por un tiempo el embarazo, estoy hecha de plástico en forma de T, mi efectividad es superior al 98 por ciento y tengo un tiempo de durabilidad de 10 años",
-            "Pildoras: Hola amiguitos yo soy las píldoras anticonceptivas debes tomarme todos los días, produzco hormonas que modifican la manera en la que funciona el organismo y prevengo los embarazos.",
-            "Implante: nadie es más efectivo que yo",
-            "Preservativo: pero yo no soy invasivo",
-            "Rosa: Haber chicos no discutan, todos son importantes y estos métodos les pueden servir mucho, recuerden que tienen un futuro por delante. Y si lo hacen con responsabilidad no habrá consecuencias.",
-            "Juana: Que buena información, creo que debemos escoger un método para disfrutar de nuestra sexualidad.",
-            "José: Exacto Juana hagamos bien las cosas para proyectarnos a una relación saludable, gracias señora Rosa nos sacó de muchas dudas",
-            "Juana: Siiii mami gracias por involucrarte en mi vida, estoy muy feliz",
-            "Recuerden que hablar de métodos anticonceptivos con tus padres te ayudará a disfrutar mejor de tu relación y así evitarás embarazos no planificados y enfermedades de trasmisión sexual. Si te cuidas, cuidas tu futuro."
+            "Hola persona que está revisando mis proyectos, espero que te gusten :)"
         ],
         "level2":[
-            "MÉTODOS ANTICONCEPTIVOS (hablar es cuidar)",
-            "Un día Juana llegaba a su casa del colegio, mientras caminaba observaba que unos nuevos vecinos estaban llegando a la casa del frente, a lo lejos pudo observar a un chico alto, rubio y de buen parecer quien robó su suspiro por un instante, Rosa, la madre de Juana se percata de esto y le pregunta:",
-            "Rosa: ¿Te gusta el chico del frente?",
-            "Juana: Noooo que va solo estaba viendo sus grandes muebles",
-            "Rosa solo deja pasar la oportunidad de hablar con su hija y continua su camino, pero ya piensa en hablar de un tema muy serio con su hija. Con el tiempo José encontró en una de sus caminatas a Juana y se enamoró al instante",
-            "José: Hola niña dime ¿cómo te llamas? ¿Quieres ser mi amiga?",
-            "Juana: Hola vecino, sabes hace mucho tiempo que te he visto llegar a la casa del frente, claro que me gustaría ser tu amiga",
-            "Al pasar las semanas, entre risas y miradas empezaron a forjar algo más que una simple amistad",
-            "José: Sabes hace mucho tiempo que pienso que podríamos ser algo más eeeee eeee no se como decirte esto",
-            "Juana: Si quiero ser tu novia",
-            "José: ¿Enserio? Que emoción siiiii",
-            "La pareja empezó a ser cada vez más cercanos y poco a poco los besos y las caricias eran más intensas, un día Rosa la mamá de Juana al ver que se iban acercando los dos jóvenes cada vez más se dispuso a conversar con ellos",
-            "José: Dime Juana ¿por qué quiere hablar tu mama con nosotros?",
-            "Juana: No sé, a mí tampoco me ha dicho nada",
-            "Rosa: Hola chicos, al ver que ustedes van en serio con su relación, quiero que hoy hablemos de algo muy importante, los métodos anticonceptivos",
-            "Juana: QUEEEÉ MAMAAAAÁ ¿Cómo puedes decir eso? Qué vergüenza",
-            "Rosa: Tranquila hija, ¿Acaso no han pensado en que una mala decisión puede llegar a cambiar su vida?",
-            "José: Sabes Juana creo que tu mami tiene razón, deberíamos hablar de este tema para mantener una relación saludable",
-            "Juana: Si tienes razón, pero ¿qué métodos existen para cuidarnos?",
-            "Rosa: Miren mis niños les voy a presentar varios.",
-            "Preservativo: Hola amiguitos yo soy su amigo de látex, me parezco a una funda que se coloca en el pene y tengo una eficiencia del 85 al 95 por ciento y también estoy junto a mi compañera el preservativo femenino y nuestra principal función es evitar que los espermatozoides lleguen al ovulo.",
-            "Inyección: Hola amiguitos yo soy una inyección que debes utilizar una vez cada mes o una vez cada 3 meses. Yo evito la ovulación y así evito el embarazo.",
-            "T de cobre: Hola amiguitos yo soy DIU un dispositivo intrauterino y mi principal función es evitar por un tiempo el embarazo, estoy hecha de plástico en forma de T, mi efectividad es superior al 98 por ciento y tengo un tiempo de durabilidad de 10 años",
-            "Pildoras: Hola amiguitos yo soy las píldoras anticonceptivas debes tomarme todos los días, produzco hormonas que modifican la manera en la que funciona el organismo y prevengo los embarazos.",
-            "Implante: nadie es más efectivo que yo",
-            "Preservativo: pero yo no soy invasivo",
-            "Rosa: Haber chicos no discutan, todos son importantes y estos métodos les pueden servir mucho, recuerden que tienen un futuro por delante. Y si lo hacen con responsabilidad no habrá consecuencias.",
-            "Juana: Que buena información, creo que debemos escoger un método para disfrutar de nuestra sexualidad.",
-            "José: Exacto Juana hagamos bien las cosas para proyectarnos a una relación saludable, gracias señora Rosa nos sacó de muchas dudas",
-            "Juana: Siiii mami gracias por involucrarte en mi vida, estoy muy feliz",
-            "Recuerden que hablar de métodos anticonceptivos con tus padres te ayudará a disfrutar mejor de tu relación y así evitarás embarazos no planificados y enfermedades de trasmisión sexual. Si te cuidas, cuidas tu futuro."
+            "Hola persona que está revisando mis proyectos, espero que te gusten :)"
         ],
         "level3":[
-            "APRENDIENDO EN FAMILIA",
-            "En una pequeña ciudad de Ecuador existía una niña llamada Lorena que se sentía muy triste porque sus papás no le hacían caso y pasaban siempre en el celular, un día al salir de la escuela sus padres tardaron 3 horas en ir a recogerla y cuando llegaron ella preguntó",
-            "¿Papi, papi tal vez estabas trabajando y por eso no llegaste pronto?",
-            "El padre de Lorena contestó ",
-            "La verdad se me pasó el tiempo volando, estuve viendo unos videos muy importantes y cuando me di cuenta ya era muy tarde, tu madre igual estuvo haciendo unos deberes de la universidad y no se percató de la hora.",
-            "Lorena se sintió triste porque pensó que no era tan importante para sus padres, pues no era la única vez que le sucedían estas cosas y sus notas con el tiempo empezaron a bajar",
-            "A la semana siguiente la mamá de Lorena fue llamada por la directora de la escuela y preguntó por qué existía un cambio en su hija",
-            "Luego de una larga charla Lorena y sus padres recibieron un curso para mejorar el ambiente familiar en donde aprendieron que su hija era más importante que cualquier actividad que realicen y entendieron que la familia unida es la que presta atención a todos los miembros, los dispositivos móviles y las herramientas digitales de ocio pasaron a segundo plano",
-            "Al pasar el tiempo los padres empezaron a prestar más atención a Lorena y dejaron de a poco el teléfono utilizándolo solo cuando era verdaderamente necesario, por otro lado, Lorena empezó a sentirse más querida ya que sus padres le mostraron lo importante que era para ellos y en un abrir y cerrar de ojos sus notas subieron.",
-            "Desde ese momento sus vidas mejoraron y hoy son una familia feliz."
+            "Hola persona que está revisando mis proyectos, espero que te gusten :)"
         ],
         "level4":[
-            "APRENDIENDO EN FAMILIA",
-            "En una pequeña ciudad de Ecuador existía una niña llamada Lorena que se sentía muy triste porque sus papás no le hacían caso y pasaban siempre en el celular, un día al salir de la escuela sus padres tardaron 3 horas en ir a recogerla y cuando llegaron ella preguntó",
-            "¿Papi, papi tal vez estabas trabajando y por eso no llegaste pronto?",
-            "El padre de Lorena contestó ",
-            "La verdad se me pasó el tiempo volando, estuve viendo unos videos muy importantes y cuando me di cuenta ya era muy tarde, tu madre igual estuvo haciendo unos deberes de la universidad y no se percató de la hora.",
-            "Lorena se sintió triste porque pensó que no era tan importante para sus padres, pues no era la única vez que le sucedían estas cosas y sus notas con el tiempo empezaron a bajar",
-            "A la semana siguiente la mamá de Lorena fue llamada por la directora de la escuela y preguntó por qué existía un cambio en su hija",
-            "Luego de una larga charla Lorena y sus padres recibieron un curso para mejorar el ambiente familiar en donde aprendieron que su hija era más importante que cualquier actividad que realicen y entendieron que la familia unida es la que presta atención a todos los miembros, los dispositivos móviles y las herramientas digitales de ocio pasaron a segundo plano",
-            "Al pasar el tiempo los padres empezaron a prestar más atención a Lorena y dejaron de a poco el teléfono utilizándolo solo cuando era verdaderamente necesario, por otro lado, Lorena empezó a sentirse más querida ya que sus padres le mostraron lo importante que era para ellos y en un abrir y cerrar de ojos sus notas subieron.",
-            "Desde ese momento sus vidas mejoraron y hoy son una familia feliz."
+            "Hola persona que está revisando mis proyectos, espero que te gusten :)"
         ]
     },
     "level1": [
         {
-            "question": "¿Cuál es el título de la historia?",
-            "answers": ["Métodos anticonceptivos", "Métodos dietéticos", "Métodos de evaluación"],
-            "correctAnswer": 0
+        "question": "¿Cómo se llama el creador?",
+        "answers": ["Ariel", "Mario", "Nathy"],
+        "correctAnswer": 0
         },
         {
-            "question": "¿Cuáles son las características de José?",
-            "answers": ["Mediano, de buen parecer.", "Alto, rubio y de buen parecer.", "Pequeño, cabello negro."],
-            "correctAnswer": 1
+        "question": "¿Cómo es Mario?",
+        "answers": ["Alto y rubio", "Mediano con bigote", "Bajito y calvo"],
+        "correctAnswer": 1
         },
         {
-            "question": "¿Cuántos personajes aparecen en la historia?",
-            "answers": ["9", "8", "10"],
-            "correctAnswer": 0
+        "question": "¿Cuántos personajes aparecen?",
+        "answers": ["9", "8", "10"],
+        "correctAnswer": 0
         },
         {
-            "question": "¿José y Juana eran?",
-            "answers": ["Compadres", "Vecinos", "Hermanos"],
-            "correctAnswer": 1
+        "question": "¿Qué relación tienen Mario y Luigi?",
+        "answers": ["Enemigos", "Vecinos", "Hermanos"],
+        "correctAnswer": 2
         },
         {
-            "question": "¿Cuál es el nombre de la mamá de Juana?",
-            "answers": ["Mercedes ", "Rosa", "José"],
-            "correctAnswer": 1
+        "question": "¿Cómo se llama la princesa?",
+        "answers": ["Daisy", "Rosalina", "Peach"],
+        "correctAnswer": 2
         }
     ],
     "level2": [
         {
-            "question": "¿Cómo se llaman los chicos que se enamoran en la historia?",
-            "answers": ["José y Juana", "Mercedes Juan", "José y Rosa"],
-            "correctAnswer": 0
+        "question": "¿Quién ayuda a Mario?",
+        "answers": ["Luigi", "Toad", "Bowser"],
+        "correctAnswer": 0
         },
         {
-            "question": "¿De que habló mamá con Juana y José?",
-            "answers": ["De que ya se iban a casar", "De que iban a tener un hijo", "De los métodos anticonceptivos"],
-            "correctAnswer": 2
+        "question": "¿Qué les dijo Peach a Mario y Luigi?",
+        "answers": ["Cómo vencer a Bowser", "Dónde estaba el castillo", "Que trabajen en equipo"],
+        "correctAnswer": 2
         },
         {
-            "question": "¿Cuántos métodos anticonceptivos menciona la historia?",
-            "answers": ["5", "1", "4"],
-            "correctAnswer": 0
+        "question": "¿Cuántas estrellas necesitan?",
+        "answers": ["5", "1", "4"],
+        "correctAnswer": 0
         },
         {
-            "question": "¿De qué material es el preservativo?",
-            "answers": ["Plástico", "Latex", "Cuero"],
-            "correctAnswer": 1
+        "question": "¿De qué son los bloques?",
+        "answers": ["Metal", "Ladrillo", "Nube"],
+        "correctAnswer": 1
         },
         {
-            "question": "¿Cuantos preservativos menciona el texto?",
-            "answers": ["Solo Preservativo masculino", "Solo Preservativo femenino", "Preservativo masculino y femenino"],
-            "correctAnswer": 2
+        "question": "¿Qué bloque tiene un hongo?",
+        "answers": ["Invisible", "Interrogación", "Normal"],
+        "correctAnswer": 1
         }
     ],
     "level3": [
         {
-            "question": "¿Cómo se llamaba la niña de la historia?",
-            "answers": ["Anita", "Lorena", "Laura"],
-            "correctAnswer": 1
+        "question": "¿Cómo se llama la amiga de Peach?",
+        "answers": ["Daisy", "Pauline", "Wendy"],
+        "correctAnswer": 0
         },
         {
-            "question": "¿Cuántas horas se demoraron en ir a retirar a la niña de la escuela?",
-            "answers": ["2", "1", "3"],
-            "correctAnswer": 2
+        "question": "¿Cuántos niveles pasaron antes del castillo?",
+        "answers": ["2", "1", "3"],
+        "correctAnswer": 2
         },
         {
-            "question": "¿Quiénes pasaban solo en el celular?",
-            "answers": ["Los papás", "Los abuelos", "Los tíos"],
-            "correctAnswer": 0
+        "question": "¿Quién molesta a Mario con caparazón?",
+        "answers": ["Toad", "Koopa", "Yoshi"],
+        "correctAnswer": 1
         },
         {
-            "question": "¿Por qué el papá de Lorena no le fue a ver pronto a la escuela?",
-            "answers": ["Porque estaba trabajando", "Porque estaba en el hospital", "Porque estaba viendo videos"],
-            "correctAnswer": 2
+        "question": "¿Por qué Luigi se atrasó?",
+        "answers": ["Se perdió", "Se durmió", "Ayudaba a Toad"],
+        "correctAnswer": 2
         },
         {
-            "question": "¿Qué estaba haciendo la mamá para no acordarse de recoger a su hija?",
-            "answers": ["Cocinado ", "Deberes de la Universidad ", "Arreglando la casa"],
-            "correctAnswer": 1
+        "question": "¿Qué hacía Mario antes de ir por Peach?",
+        "answers": ["Cocinaba", "Arreglaba tuberías", "Jugaba con Yoshi"],
+        "correctAnswer": 1
         }
     ],
     "level4": [
         {
-            "question": "¿Cómo se sentía Lorena?",
-            "answers": ["Feliz", "Enojada", "Triste"],
-            "correctAnswer": 2
+        "question": "¿Cómo se sentía Peach?",
+        "answers": ["Feliz", "Molesta", "Triste"],
+        "correctAnswer": 2
         },
         {
-            "question": "¿Qué cambios tuvo la niña en la escuela?",
-            "answers": ["Bajo de notas en la escuela y cambio de actitud", "No paso nada con la niña ", "La niña era buena estudiante"],
-            "correctAnswer": 2
+        "question": "¿Qué pasó cuando Mario llegó?",
+        "answers": ["Bowser ganó", "Nada cambió", "El reino se alegró"],
+        "correctAnswer": 2
         },
         {
-            "question": "¿Cuáles fueron los cambios en la familia para que la niña no se sintiera triste?",
-            "answers": ["Estar todo el tiempo en el celular", "Las herramientas digitales de ocio pasaron a segundo plano.", "No hubo cambio en la familia"],
-            "correctAnswer": 1
+        "question": "¿Qué hicieron Mario y Luigi para mejorar?",
+        "answers": ["Celular todo el día", "Trabajaron juntos", "Se separaron"],
+        "correctAnswer": 1
         },
         {
-            "question": "Cuándo los papás cambiaron la situación, ¿qué pasó con Lorena?",
-            "answers": ["Se sentía feliz y mejoró las notas en la escuela", "Estaba siempre enojada", "Fue la niña más infeliz del mundo"],
-            "correctAnswer": 0
+        "question": "¿Qué pasó cuando rescataron a Peach?",
+        "answers": ["Fiesta en el reino", "Peach se fue", "Bowser volvió"],
+        "correctAnswer": 0
         },
         {
-            "question": "¿Qué mensaje nos deja la lectura?",
-            "answers": ["Que debemos estar siempre en los dispositivos móviles", "Que la familia está en primer lugar y no se la debe descuidar.", "Que no importa estar todo el tiempo en el celular porque te hace feliz"],
-            "correctAnswer": 1
+        "question": "¿Cuál es el mensaje?",
+        "answers": ["Solo importa jugar", "La familia es lo primero", "Estar solo es mejor"],
+        "correctAnswer": 1
         }
-    ]
+    ]      
 }
